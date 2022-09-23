@@ -1,0 +1,330 @@
+
+#background_me {
+    width: 70%;
+    height: 95%;
+    border: 0px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #202124;
+}
+  .me > .circle_icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 5%;
+    left: 95%;
+    background-color: rgb(72, 73, 73); 
+    display: flex;
+    justify-content: center;
+
+  }
+  #small_tool_bar{
+    visibility:hidden;
+    width: 100px;
+    height: 30px;
+    border-radius: 30%;
+    position: absolute;
+    background-color: #5F6368;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center ;
+  }
+  #background_me:hover >.me_icon >#small_tool_bar{
+    visibility:visible;
+    opacity: 0.3;
+  }
+  #background_me > .me_icon > #small_tool_bar:hover{
+    visibility:visible;
+    opacity: 0.8;
+  }
+  .me_icon {
+    width: 200px;
+    height: 200px;
+    border: 0px;
+    border-radius: 50%;
+    position: absolute;
+    box-sizing: border-box;
+    background-color: #34299a;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .other_user >.user{
+    width: 200px;
+    height: 200px;
+    border: 0px;
+    position: relative;
+    border-radius: 10%;
+    background-color: #636363;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+  }
+  #background_others {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    flex-wrap: wrap;
+    width: 30%;
+    height: 95%;
+    border: 0px;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    background-color: #202124;
+  }
+  @media(max-width:1400px){
+    .other_user>.user{
+      width:100px;
+      height: 100px;
+    }
+    .other_user>.user>.user_circle{
+      width: 50px;
+      height: 50px;
+    }
+    .me>.me_icon{
+      width: 100px;
+      height: 100px;
+
+    }
+  }
+  @media(max-height:500px){
+    .other_user>.user{
+      width:100px;
+      height: 100px;
+    }
+    .other_user>.user>.user_circle{
+      width: 50px;
+      height: 50px;
+    }
+    .me>.me_icon{
+      width: 100px;
+      height: 100px;
+
+    }
+    
+  }
+  @media(max-width:1000px){
+    .other_user>.user{
+      width:50px;
+      height: 50px;
+    }
+    .other_user>.user>.user_circle{
+      width: 25px;
+      height: 25px;
+    }
+  }
+  @media(max-height:250px){
+    .other_user>.user{
+      width:50px;
+      height: 50px;
+    }
+    .other_user>.user>.user_circle{
+      width: 25px;
+      height: 25px;
+    }
+  }
+    
+  .user > .user_circle {
+    width: 75px;
+    height: 75px;
+    border: 0px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #505296
+  }
+
+
+  .user >.user_name{
+    width: 10px;
+    height: 10px;
+    border: 0px;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    color: white;
+  }
+  .user_circle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user_circle > .user_picture{
+    width: 10px;
+    height: 10px;
+    border: 0px;
+    position: relative;
+    color: white;
+  }
+  .user > .circle_icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background-color: rgb(72, 73, 73);
+    display: flex;
+    justify-content: center;
+
+  }
+  .circle_icon >i.fa-solid{
+    position: absolute;
+    top :50%;
+    transform: translate(0%, -50%);
+  
+  }
+  input{
+    display: none;
+  }
+  input[type="checkbox"]:checked+i.fa-solid{
+    visibility: hidden;
+    
+  }
+  #mic_red:checked+.circle_icon>#mic_red_slash{
+    visibility: hidden;
+  }
+  #mic_red:checked+.circle_icon{
+    background-color: #5F6368;
+  }
+  #mic_red_2:checked+.circle_icon>#mic_red_slash_2{
+    visibility: hidden;
+  }
+  #mic_red_2:checked+.circle_icon{
+    background-color: #5F6368;
+  }
+  .tool_bar_mid{
+    height: 5%;
+    width: 80%;
+    border: 0px;
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    background-color: #202124;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .tool_bar_mid> .circle_icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    top: 0%;
+    left: 0%; 
+    display: flex;
+    justify-content: center;
+    background-color: #5F6368;
+    margin: 10px;
+
+  }
+  .tool_bar_right{
+    height: 5%;
+    width: 20%;
+    border: 0px;
+    position: fixed;
+    bottom: 0%;
+    left: 80%;
+    background-color: #202124;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .tool_bar_right> .circle_icon_2{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    top: 0%;
+    left: 0%; 
+    display: flex;
+    justify-content: center;
+
+  }
+  .circle_icon_2 >i{
+    position: absolute;
+    top :50%;
+    transform: translate(0%, -50%);
+  
+  }
+  i{
+    color: white;
+  }
+  #red1{
+    background-color: #EA4335;
+  }
+  #red2{
+    background-color: #EA4335;
+  }
+  #red3{
+    background-color: #EA4335;
+    width: 40px;
+    height: 30px;
+    border-radius: 40%;
+  }
+  .time_meetname{
+    width: 200px;
+    height: 50px;
+    color:white;
+    position: absolute;
+    top:30%;
+    left: 0%;
+  }
+  .circle_icon>.func{
+    width: 40px;
+    height: 20px;
+    visibility: hidden;
+    background-color: #5F6368;
+    color: white;
+    position: absolute;
+    border-radius: 10%;
+    top: -40%;
+    left: 0%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle_icon:hover>.func{
+    visibility: visible;
+  }
+  .circle_icon_2>.func{
+    width: 40px;
+    height: 20px;
+    visibility: hidden;
+    background-color: #5F6368;
+    color: white;
+    position: absolute;
+    border-radius: 10%;
+    top: -40%;
+    left: 0%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle_icon_2:hover>.func{
+    visibility: visible;
+  }
+  @media(max-width:1000px){
+    .me{
+      width: 30%;
+    }
+  }
