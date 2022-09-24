@@ -18,7 +18,7 @@
     border-radius: 50%;
     position: absolute;
     top: 5%;
-    left: 95%;
+    right: 5%;
     background-color: rgb(72, 73, 73); 
     display: flex;
     justify-content: center;
@@ -125,6 +125,25 @@
       width: 25px;
       height: 25px;
     }
+    .other_user>.user>.circle_icon{
+      width: 25px;
+      height: 25px;
+    }
+    .other_user>.user>.circle_icon>i{
+      font-size: 5px;
+    }
+    .tool_bar_mid>label>i{
+      font-size: 5px;
+    }
+    .tool_bar_mid>.time_meetname{
+      font-size: 5px;
+    }
+    .tool_bar_mid>.circle_icon{
+      margin: 5px;
+    }
+    .tool_bar_right>label>i{
+      font-size:5px;
+    }
   }
   @media(max-height:250px){
     .other_user>.user{
@@ -134,6 +153,25 @@
     .other_user>.user>.user_circle{
       width: 25px;
       height: 25px;
+    }
+    .other_user>.user>.circle_icon{
+      width: 25px;
+      height:25px;
+    }
+    .other_user>.user>.circle_icon>i{
+      font-size: 5px;
+    }
+    .tool_bar_mid>label>i{
+      font-size: 5px;
+    }
+    .tool_bar_mid>.time_meetname{
+      font-size: 5px;
+    }
+    .tool_bar_mid> .circle_icon{
+      margin: 5px;
+    }
+    .tool_bar_right>label>i{
+      font-size:5px;
     }
   }
     
@@ -175,8 +213,8 @@
     height: 30px;
     border-radius: 50%;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5%;
+    right: 5%;
 
     background-color: rgb(72, 73, 73);
     display: flex;
@@ -231,7 +269,7 @@
     display: flex;
     justify-content: center;
     background-color: #5F6368;
-    margin: 10px;
+    margin: 5px;
 
   }
   .tool_bar_right{
@@ -322,9 +360,4 @@
   }
   .circle_icon_2:hover>.func{
     visibility: visible;
-  }
-  @media(max-width:1000px){
-    .me{
-      width: 30%;
-    }
   }
