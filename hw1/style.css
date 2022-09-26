@@ -12,7 +12,19 @@
     align-items: center;
     background-color: #202124;
 }
-  .me > .circle_icon{
+#background_me>i{
+  bottom: 0%;
+  left: 0%;
+  position: absolute;
+}
+#background_me>p{
+  bottom: -15px;
+  left: 20px;
+  position: absolute;
+  color: white;
+}
+
+.me > .circle_icon{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -24,7 +36,7 @@
     justify-content: center;
 
   }
-  #small_tool_bar{
+#small_tool_bar{
     visibility:hidden;
     width: 100px;
     height: 30px;
@@ -36,15 +48,19 @@
     justify-content: space-evenly;
     align-items: center ;
   }
-  #background_me:hover >.me_icon >#small_tool_bar{
+#background_me:hover >.me_icon >#small_tool_bar{
     visibility:visible;
     opacity: 0.3;
   }
-  #background_me > .me_icon > #small_tool_bar:hover{
+#background_me > .me_icon > #small_tool_bar:hover{
     visibility:visible;
     opacity: 0.8;
   }
-  .me_icon {
+.me>.me_icon>p{
+    font-size: 50px;
+    color: white;
+  }
+.me_icon {
     width: 200px;
     height: 200px;
     border: 0px;
@@ -58,7 +74,7 @@
     align-items: center;
   }
   
-  .other_user >.user{
+.other_user >.user{
     width: 200px;
     height: 200px;
     border: 0px;
@@ -71,7 +87,7 @@
     align-items: center;
 
   }
-  #background_others {
+#background_others {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-evenly;
@@ -85,7 +101,7 @@
     right: 0%;
     background-color: #202124;
   }
-  @media(max-width:1400px){
+@media(max-width:1400px){
     .other_user>.user{
       width:100px;
       height: 100px;
@@ -98,9 +114,12 @@
       width: 100px;
       height: 100px;
 
+    }
+    .me>.me_icon>p{
+      font-size: 20px;
     }
   }
-  @media(max-height:500px){
+@media(max-height:500px){
     .other_user>.user{
       width:100px;
       height: 100px;
@@ -112,11 +131,13 @@
     .me>.me_icon{
       width: 100px;
       height: 100px;
-
+    }
+    .me>.me_icon>p{
+      font-size: 20px;
     }
     
   }
-  @media(max-width:1000px){
+@media(max-width:1000px){
     .other_user>.user{
       width:50px;
       height: 50px;
@@ -144,8 +165,16 @@
     .tool_bar_right>label>i{
       font-size:5px;
     }
+    .user_circle > p{
+      font-size: 1px;
+    }
+    .user >.user_name{
+      bottom: 0px;
+      left: 0px;
+    }
+    
   }
-  @media(max-height:250px){
+@media(max-height:250px){
     .other_user>.user{
       width:50px;
       height: 50px;
@@ -173,9 +202,16 @@
     .tool_bar_right>label>i{
       font-size:5px;
     }
+    .user_circle > p{
+      font-size: 1px;
+    }
+    .user >.user_name{
+      bottom: 0px;
+      left: 0px;
+    }
   }
     
-  .user > .user_circle {
+.user > .user_circle {
     width: 75px;
     height: 75px;
     border: 0px;
@@ -185,30 +221,28 @@
   }
 
 
-  .user >.user_name{
+.user >.user_name{
     width: 10px;
     height: 10px;
     border: 0px;
     position: absolute;
-    top: 50%;
-    left: 5%;
+    bottom: 10px;
+    left: 10px;
     color: white;
   }
-  .user_circle{
+.user_circle{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
   
-  .user_circle > .user_picture{
-    width: 10px;
-    height: 10px;
-    border: 0px;
-    position: relative;
-    color: white;
-  }
-  .user > .circle_icon{
+.user_circle > p{
+  color: white;
+}
+   
+  
+.user > .circle_icon{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -221,32 +255,32 @@
     justify-content: center;
 
   }
-  .circle_icon >i.fa-solid{
+.circle_icon >i.fa-solid{
     position: absolute;
     top :50%;
     transform: translate(0%, -50%);
   
   }
-  input{
+input{
     display: none;
   }
-  input[type="checkbox"]:checked+i.fa-solid{
+input[type="checkbox"]:checked+i.fa-solid{
     visibility: hidden;
     
   }
-  #mic_red:checked+.circle_icon>#mic_red_slash{
+#mic_red:checked+.circle_icon>#mic_red_slash{
     visibility: hidden;
   }
-  #mic_red:checked+.circle_icon{
+#mic_red:checked+.circle_icon{
     background-color: #5F6368;
   }
-  #mic_red_2:checked+.circle_icon>#mic_red_slash_2{
+#mic_red_2:checked+.circle_icon>#mic_red_slash_2{
     visibility: hidden;
   }
-  #mic_red_2:checked+.circle_icon{
+#mic_red_2:checked+.circle_icon{
     background-color: #5F6368;
   }
-  .tool_bar_mid{
+.tool_bar_mid{
     height: 5%;
     width: 80%;
     border: 0px;
@@ -259,7 +293,7 @@
     justify-content: center;
     align-items: center;
   }
-  .tool_bar_mid> .circle_icon{
+.tool_bar_mid> .circle_icon{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -272,7 +306,7 @@
     margin: 5px;
 
   }
-  .tool_bar_right{
+.tool_bar_right{
     height: 5%;
     width: 20%;
     border: 0px;
@@ -285,7 +319,7 @@
     align-items: center;
     justify-content: space-evenly;
   }
-  .tool_bar_right> .circle_icon_2{
+.tool_bar_right> .circle_icon_2{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -293,31 +327,33 @@
     top: 0%;
     left: 0%; 
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
 
   }
-  .circle_icon_2 >i{
+.circle_icon_2 >i{
     position: absolute;
     top :50%;
     transform: translate(0%, -50%);
   
   }
-  i{
+i{
     color: white;
   }
-  #red1{
+#red1{
     background-color: #EA4335;
   }
-  #red2{
+#red2{
     background-color: #EA4335;
   }
-  #red3{
+#red3{
     background-color: #EA4335;
     width: 40px;
     height: 30px;
     border-radius: 40%;
   }
-  .time_meetname{
+.time_meetname{
     width: 200px;
     height: 50px;
     color:white;
@@ -325,7 +361,7 @@
     top:30%;
     left: 0%;
   }
-  .circle_icon>.func{
+.circle_icon>.func{
     width: 40px;
     height: 20px;
     visibility: hidden;
@@ -333,8 +369,7 @@
     color: white;
     position: absolute;
     border-radius: 10%;
-    top: -40%;
-    left: 0%;
+    top: -60%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -351,8 +386,7 @@
     color: white;
     position: absolute;
     border-radius: 10%;
-    top: -40%;
-    left: 0%;
+    top: -60%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -360,4 +394,26 @@
   }
   .circle_icon_2:hover>.func{
     visibility: visible;
+  }
+  #mic_bar{
+    width: 60px;
+  }
+  #screen_share{
+    width: 150px;
+  }
+  #phone_bar{
+    width: 80px;
+  }
+  #meet_bar{
+    width: 100px;
+  }
+  #group_bar{
+    width: 120px;
+  }
+  #chat_bar{
+    width: 200px;
+  }
+  #lock_person_bar{
+    width: 120px;
+    right: -40%;
   }
