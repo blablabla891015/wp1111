@@ -1,7 +1,6 @@
-import logo from './logo.svg';
+
 import './App.css';
-import React from 'react'
-import ReactDOM from 'react-dom';
+import React from 'react';
 class Todo_items extends React.Component{
   constructor(props){
     super(props)
@@ -9,9 +8,9 @@ class Todo_items extends React.Component{
   render(){
     return <li className='todo-app__item'>
       <div className='todo-app__checkbox'>
-        <input type={'checkbox'} itemID="2"></input>
+        <input type={'checkbox'}  id={this.props.id}></input>
 
-        <label htmlFor='2'></label>
+        <label htmlFor={this.props.id}></label>
       </div>
       {this.props.thing}
       </li>
@@ -72,14 +71,16 @@ class Todo_app_root extends React.Component{
   }
   keypress=(e)=>{
     if(e.key==='Enter'){
-      this.state.lis.push(<Todo_items key={this.state.count_child+1} thing={e.target.value} ></Todo_items>)
+      this.state.lis.push(<Todo_items key={this.state.count_child+1} thing={e.target.value} id={this.state.count_child+1}></Todo_items>)
       this.setState(s=>({lis:s.lis}))
       this.setState(s=>({count_child: s.count_child+1}))
     }
   }
   render(){
     return <div className="todo-app__root">
-    <header className="todo-app__header"></header>
+    <header className="todo-app__header">
+      <p className='todo-app__title'>todos</p>
+    </header>
     <Todo_app_main lis={this.state.lis} count_child={this.state.count_child} keypress={this.keypress}></Todo_app_main>
     <Todo_app_footer lis={this.state.lis}></Todo_app_footer>
   </div>
