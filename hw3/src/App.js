@@ -10,20 +10,15 @@ class Todo_items extends React.Component{
   }
   inline=(e)=>{
     if(e.target.checked){
-      // console.log("check")
-      // this.setState(s=>({count_child: s.count_child-1}))
       this.setState(s=>({Thing:<h1 className='todo-app__item-detail' style={{textDecoration:"line-through",opacity:0.5}}>{this.props.thing}</h1>}))
     }
     else{
-      // this.setState(s=>({count_child: s.count_child+1}))
       this.setState(s=>({Thing:<h1 className='todo-app__item-detail'>{this.props.thing}</h1>}))
     }
-    // this.props.handelchange()
   }
   combine=(e)=>{
     this.inline(e)
     this.props.handelchange(e)
-
   }
   render(){
     return <li className='todo-app__item'>
@@ -43,10 +38,8 @@ class Todo_app_main extends React.Component{
     lis:props.lis,
     count_child:props.count_child,
     keypress:props.keypress
-
   }
   }
-     
   render(){
     return <section className='todo-app__main'>
       <input className='todo-app__input' onKeyPress={this.state.keypress} ></input>
@@ -88,7 +81,7 @@ class Todo_app_root extends React.Component{
     super(props)
     this.state={
       lis:[],
-      count_child:0
+      count_child:0,
     }
   }
   keypress=(e)=>{
@@ -101,9 +94,7 @@ class Todo_app_root extends React.Component{
     }
   }
   handelchange=(e)=>{
-    console.log(e)
     if(e.target.checked){
-      console.log("check")
       this.setState(s=>({count_child: s.count_child-1}))
       this.setState(s=>({Thing:<h1 className='todo-app__item-detail' style="text-decoration: line-through; opacity: 0.5;">{this.props.thing}</h1>}))
     }
