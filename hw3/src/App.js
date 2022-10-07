@@ -97,6 +97,7 @@ class Todo_app_root extends React.Component{
       this.setState(s=>({lis:s.lis}))
       console.log(this.state.count_child)
       this.setState(s=>({count_child: s.count_child+1}))
+      e.target.value=""
     }
   }
   handelchange=(e)=>{
