@@ -64,8 +64,19 @@ class Todo_app_footer extends React.Component{
     else{
       return <footer className='todo-app__footer'>
       <Todo_app_total lis={this.props.lis} count_child={this.props.count_child}></Todo_app_total>
-      <ul className='todo-app__view-buttons'></ul>
-      <div className='todo-app__clean'></div>
+      <ul className='todo-app__view-buttons'>
+        <div>
+          <p>All</p>
+        </div>
+        <div>
+          <p>Activate</p>
+
+        </div>
+        <div>
+          <p>Completed</p>
+        </div>
+      </ul>
+      <div className='todo-app__clean'>clear</div>
     </footer>
     }
   }
@@ -79,7 +90,7 @@ class Todo_app_total extends React.Component{
     }
   }
   render(){
-    return <div className='todo-app__total'>{this.props.count_child}</div>
+    return <div className='todo-app__total'>{this.props.count_child} left</div>
   }
 }
 class Todo_app_root extends React.Component{
