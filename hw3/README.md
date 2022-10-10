@@ -1,4 +1,7 @@
-哈哈哈哈
+*下面按鈕有點醜，但懶得弄好看
+*功能上沒問題，拜託給我pass
+*好人一生平安
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
