@@ -68,10 +68,36 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         // Update board and remainFlagNum in the end
 
     };
+    var newBoard = JSON.parse(JSON.stringify(board));
+    const smart=(x,y,before_x,before_y)=>{
+        newBoard[x][y].revealed=true
+        if(newBoard[x][y].value===0){
 
+            if(x<boardSize-1 && !newBoard[x+1][y].revealed && !newBoard[x+1][y].flagged){
+                // if((x+1)!==before_x){
+                    smart(x+1,y,x,y)
+                // }
+            }
+            if(y<boardSize-1 && !newBoard[x][y+1].revealed && !newBoard[x][y+1].flagged){
+                // if((y+1)!==before_y){
+                    smart(x,y+1,x,y)
+                // }
+            }
+            if(x>0 && !newBoard[x-1][y].revealed && !newBoard[x-1][y].flagged){
+                // if((x-1)!==before_x){
+                    smart(x-1,y,x,y)
+                // }
+            }
+            if(y>0 && !newBoard[x][y-1].revealed && !newBoard[x][y-1].flagged){
+                // if((y-1)!==before_y){
+                    smart(x,y-1,x,y)
+                // }
+            }
+        }
+    }
     const revealCell = (x, y) => {
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
-        let newBoard = JSON.parse(JSON.stringify(board));
+        // var newBoard = JSON.parse(JSON.stringify(board));
         for(let i=0;i<mineLocations.length;i++){
             if(x===mineLocations[i][0] && y===mineLocations[i][1]){
                 setGameOver(true)
@@ -79,6 +105,9 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         }
         
         newBoard[x][y].revealed=true
+        // =======smart=======
+        smart(x,y,boardSize,boardSize)
+        // ========smart=======
         setBoard(newBoard)
         setNonMineCount(nonMineCount-1)
         if(setNonMineCount===0){
@@ -114,6 +143,21 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         </div>
     }
     const Dash=Dashboard(remainFlagNum,gameOver)
+    const tr=[]
+    tr.name=2
+    const check=()=>{
+        tr.name=tr.name-1
+        console.log(tr)
+        if(tr.name>0){
+            console.log('this 1')
+            check()
+        } 
+        if(tr.name>0){
+            console.log('this 2')
+            check()
+        }
+    }
+    check()
     return (
         <div className='boardPage' >
             <div className='boardWrapper' >
