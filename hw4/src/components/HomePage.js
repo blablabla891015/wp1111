@@ -15,13 +15,40 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
   function Start_button(startGameOnClick){
     return <button className='btn' onClick={startGameOnClick}>start</button>
   }
+  function Difficult_button(){
+    let click=()=>{
+      setShowPanel(true)
+    }
+    return <button className='btn' onClick={click}>Difficulty</button>
+  }
+  function Panel(){
+    const mine=()=>{
+      return <input  onChange={mineNumOnChange}></input>
+    }
+    const board=()=>{
+      return <input  onChange={boardSizeOnChange}></input>
+    }
+    let input_1=mine()
+    let input_2=board()
+    return <div className='controlWrapper'>
+      <p>mineNum</p>
+      {input_1}
+      <p>{input_1.value}</p>
+      <p>boardSize</p>
+      {input_2}
+      <p>{input_2.value}</p>
+    </div>
+  }
    
   const start_button=Start_button(startGameOnClick)
   return (
     <div className='HomeWrapper'>
       <p className='title'>MineSweeper</p>
       {start_button}
-
+      <div className='contralContainer'>
+        <Difficult_button></Difficult_button>
+        {showPanel?<Panel></Panel>:<div></div>}
+      </div>
       {/* Advanced TODO: Implementation of Difficult Adjustment
                 Useful Hint: <input type = 'range' min = '...' max = '...' defaultValue = '...'> 
                 Useful Hint: Error color: '#880000', default text color: '#0f0f4b', invisible color: 'transparent' 

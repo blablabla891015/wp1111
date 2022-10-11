@@ -15,7 +15,7 @@ import createBoard from '../util/createBoard';
 import React, { useEffect, useState } from 'react';
 
 
-const Board = ({ boardSize, mineNum, backToHome }) => {
+const Board = ( boardSize, mineNum, backToHome) => {
     const [board, setBoard] = useState([]);                     // An 2-dimentional array. It is used to store the board.
     const [nonMineCount, setNonMineCount] = useState(0);        // An integer variable to store the number of cells whose value are not '💣'.
     const [mineLocations, setMineLocations] = useState([]);     // An array to store all the coordinate of '💣'.
@@ -69,29 +69,20 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
 
     };
     var newBoard = JSON.parse(JSON.stringify(board));
-    const smart=(x,y,before_x,before_y)=>{
+    const smart=(x,y)=>{
         newBoard[x][y].revealed=true
         if(newBoard[x][y].value===0){
-
             if(x<boardSize-1 && !newBoard[x+1][y].revealed && !newBoard[x+1][y].flagged){
-                // if((x+1)!==before_x){
-                    smart(x+1,y,x,y)
-                // }
+                    smart(x+1,y)
             }
             if(y<boardSize-1 && !newBoard[x][y+1].revealed && !newBoard[x][y+1].flagged){
-                // if((y+1)!==before_y){
-                    smart(x,y+1,x,y)
-                // }
+                    smart(x,y+1)
             }
             if(x>0 && !newBoard[x-1][y].revealed && !newBoard[x-1][y].flagged){
-                // if((x-1)!==before_x){
-                    smart(x-1,y,x,y)
-                // }
+                    smart(x-1,y)
             }
             if(y>0 && !newBoard[x][y-1].revealed && !newBoard[x][y-1].flagged){
-                // if((y-1)!==before_y){
-                    smart(x,y-1,x,y)
-                // }
+                    smart(x,y-1)
             }
         }
     }
@@ -106,7 +97,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         
         newBoard[x][y].revealed=true
         // =======smart=======
-        smart(x,y,boardSize,boardSize)
+        smart(x,y)
         // ========smart=======
         setBoard(newBoard)
         setNonMineCount(nonMineCount-1)
@@ -159,13 +150,28 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     }
     check()
     return (
-        <div className='boardPage' >
-            <div className='boardWrapper' >
-                <div className='boardContainer'>
-                    {Dash}
-                    <Cell_list></Cell_list>
+        <div>
+            <div className='boardPage' >
+                <div className='boardWrapper' >
+                    <div className='boardContainer'>
+                        {Dash}
+                        <Cell_list></Cell_list>
+                    </div>
                 </div>
             </div>
+            {(gameOver || win)?<div className='modal'>
+                <div className='modalWrapper'>
+                    <div className='modalContent'>
+                        <div className='modalResult'>
+                            {(gameOver && !win)?"Game over":(!gameOver && win)?'Win':''}
+                        </div>
+                        <div className='modalBtnWrapper'>
+                            {(gameOver && !win)?<div className='modalBtn' onClick={restartGame}>try again</div>:<div></div>}
+                            {(gameOver || win)?<div className='modalBtn' onClick={backToHome}>backToHome</div>:<div></div>}
+                        </div>
+                    </div>
+                </div>
+            </div>:<div></div>}
         </div>
     );
 
