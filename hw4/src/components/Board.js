@@ -48,7 +48,6 @@ const Board = ( boardSize, mineNum, backToHome) => {
 
     // On Right Click / Flag Cell
     const updateFlag = (e, x, y) => {
-        console.log("right")
         // To not have a dropdown on right click
         e.preventDefault();
         // Deep copy of a state
@@ -69,7 +68,10 @@ const Board = ( boardSize, mineNum, backToHome) => {
 
     };
     var newBoard = JSON.parse(JSON.stringify(board));
+    var Count=0
     const smart=(x,y)=>{
+        Count++
+        console.log(Count)
         newBoard[x][y].revealed=true
         if(newBoard[x][y].value===0){
             if(x<boardSize-1 && !newBoard[x+1][y].revealed && !newBoard[x+1][y].flagged){
@@ -95,15 +97,17 @@ const Board = ( boardSize, mineNum, backToHome) => {
             }
         }
         
-        newBoard[x][y].revealed=true
+        // newBoard[x][y].revealed=true
         // =======smart=======
         smart(x,y)
         // ========smart=======
         setBoard(newBoard)
-        setNonMineCount(nonMineCount-1)
-        if(setNonMineCount===0){
+
+        let newnonmine=nonMineCount-Count
+        if(newnonmine===0 && !gameOver){
             setWin(true)
         }
+        setNonMineCount(newnonmine)
 
         // Basic TODO: Complete the conditions of revealCell (Refer to reveal.js)
         // Hint: If `Hit the mine`, check ...?
@@ -134,21 +138,6 @@ const Board = ( boardSize, mineNum, backToHome) => {
         </div>
     }
     const Dash=Dashboard(remainFlagNum,gameOver)
-    const tr=[]
-    tr.name=2
-    const check=()=>{
-        tr.name=tr.name-1
-        console.log(tr)
-        if(tr.name>0){
-            console.log('this 1')
-            check()
-        } 
-        if(tr.name>0){
-            console.log('this 2')
-            check()
-        }
-    }
-    check()
     return (
         <div>
             <div className='boardPage' >
@@ -166,7 +155,8 @@ const Board = ( boardSize, mineNum, backToHome) => {
                             {(gameOver && !win)?"Game over":(!gameOver && win)?'Win':''}
                         </div>
                         <div className='modalBtnWrapper'>
-                            {(gameOver && !win)?<div className='modalBtn' onClick={restartGame}>try again</div>:<div></div>}
+                            {(gameOver && !win)?<div className='modalBtn' onClick={restartGame}>try again</div>:(!gameOver && win)?
+                            <div className='modalBtn' onClick={restartGame}>new game</div>:<div></div>}
                             {(gameOver || win)?<div className='modalBtn' onClick={backToHome}>backToHome</div>:<div></div>}
                         </div>
                     </div>

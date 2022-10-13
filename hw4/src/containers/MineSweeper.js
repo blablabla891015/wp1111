@@ -23,16 +23,15 @@ const MineSweeper = () => {
 
     // Advanced TODO: Change `mineNum` to the number you send by this function
     const mineNumOnChange = (e) => {
-        const value=e.target.value
-        setMineNum(value)
+        console.log(e.target.value)
+        setMineNum(e.target.value)
         
     }
 
     // Advanced TODO: Change `boardSize` to the number you send by this function
     const boardSizeOnChange = (e) => {
-        console.log('check')
-        const value=e.target.value
-        setBoardSize(value)
+        console.log(e.target.value)
+        setBoardSize(e.target.value)
         
     }
 
@@ -43,7 +42,7 @@ const MineSweeper = () => {
     }
     // ==============Component=============
     const homePage=HomePage({startGameOnClick,mineNumOnChange,boardSizeOnChange,mineNum,boardSize})
-    const board=Board(boardSize,mineNum,backToHomeOnClick)
+    const board=Board(boardSize,1,backToHomeOnClick)
     // ==============Component=============
     return (
         <div className='mineSweeper'>
