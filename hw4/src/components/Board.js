@@ -15,7 +15,7 @@ import createBoard from '../util/createBoard';
 import React, { useEffect, useState } from 'react';
 
 
-const Board = ( boardSize, mineNum, backToHome) => {
+const Board = ( boardSize, mineNum, backToHome,startGame) => {
     const [board, setBoard] = useState([]);                     // An 2-dimentional array. It is used to store the board.
     const [nonMineCount, setNonMineCount] = useState(0);        // An integer variable to store the number of cells whose value are not '💣'.
     const [mineLocations, setMineLocations] = useState([]);     // An array to store all the coordinate of '💣'.
@@ -137,7 +137,7 @@ const Board = ( boardSize, mineNum, backToHome) => {
             {res_list}
         </div>
     }
-    const Dash=Dashboard(remainFlagNum,gameOver)
+    const Dash=Dashboard(remainFlagNum,gameOver,win,startGame)
     return (
         <div>
             <div className='boardPage' >

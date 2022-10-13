@@ -42,7 +42,7 @@ const MineSweeper = () => {
     }
     // ==============Component=============
     const homePage=HomePage({startGameOnClick,mineNumOnChange,boardSizeOnChange,mineNum,boardSize})
-    const board=Board(boardSize,1,backToHomeOnClick)
+    const board=Board(boardSize,1,backToHomeOnClick,startGame)
     // ==============Component=============
     return (
         <div className='mineSweeper'>

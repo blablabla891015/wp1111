@@ -22,21 +22,19 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
     return <button className='btn' onClick={click}>Difficulty</button>
   }
   function Panel(){
-    const mine=()=>{
-      return <input type = 'range' min = '0' max = '100' defaultValue = '10' onInput={mineNumOnChange} ></input>
+    function Mine(){
+      return <input type = 'range' min="1" max="20"  defaultValue="10" ></input>
     }
-    const board=()=>{
-      return <input type = 'range' min = '1' max = '15' defaultValue = '8' onInput={boardSizeOnChange} ></input>
+    function Board(){
+      return <input type = 'range' min = '1' max = '15' defaultValue = '8'  ></input>
     }
-    let input_1=mine()
-    let input_2=board()
+    // let input_1=mine()
+    // let input_2=board()
     return <div className='controlWrapper'>
       <p>mineNum</p>
-      {input_1}
-      <p>{input_1.value}</p>
+      <Mine></Mine>
       <p>boardSize</p>
-      {input_2}
-      <p>{input_2.value}</p>
+      <Board></Board>
     </div>
   }
    
