@@ -1,3 +1,4 @@
+*拜託給perfect 好人一生平安
 # HW4 MineSweeper
 ![](https://i.imgur.com/pfsPBRR.png)
 ## [Demo Video](https://www.youtube.com/watch?v=mDx4bi-rA-Q)
