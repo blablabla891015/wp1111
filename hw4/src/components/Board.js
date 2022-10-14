@@ -7,6 +7,7 @@
 ****************************************************************************/
 
 import './css/Board.css'
+import './css/Modal.css'
 import Cell from './Cell';
 import Modal from './Modal';
 import Dashboard from './Dashboard';
@@ -23,14 +24,12 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
     const [remainFlagNum, setRemainFlagNum] = useState(0);      // An integer variable to store the number of remain flags.
     const [win, setWin] = useState(false);                      // A boolean variable. If true, means that you win the game.
     const [cell_list,setCelllist]=useState([])
+    // useEffect(() => {
+    //     // Calling the function
+    //     freshBoard();
+    // }, []);
     useEffect(() => {
         // Calling the function
-        console.log('check')
-        freshBoard();
-    }, []);
-    useEffect(() => {
-        // Calling the function
-        console.log('check2')
         freshBoard();
     }, [boardSize,mineNum]);
     useEffect(() => {
@@ -151,7 +150,6 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
 
     // ==============new component==========
     const Cell_list =(board)=>{
-        console.log(board)
         let res_list=[]
         for(let x=0;x<boardSize;x++){
             let subrow=[]
@@ -169,6 +167,11 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
         return res_list
     }
     const Dash=Dashboard(remainFlagNum,gameOver,win,startGame)
+    const handleBacktohome=()=>{
+        backToHome()
+        restartGame()
+
+    }
     return (
         <div>
             <div className='boardPage' >
@@ -188,7 +191,7 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
                         <div className='modalBtnWrapper'>
                             {(gameOver && !win)?<div className='modalBtn' onClick={restartGame}>try again</div>:(!gameOver && win)?
                             <div className='modalBtn' onClick={restartGame}>new game</div>:<div></div>}
-                            {(gameOver || win)?<div className='modalBtn' onClick={backToHome}>backToHome</div>:<div></div>}
+                            {(gameOver || win)?<div className='modalBtn' onClick={handleBacktohome}>backToHome</div>:<div></div>}
                         </div>
                     </div>
                 </div>

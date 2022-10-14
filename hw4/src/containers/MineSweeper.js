@@ -50,7 +50,7 @@ const MineSweeper = () => {
         
     }
     // ==============Component=============
-    const homePage=HomePage({startGameOnClick,mineNumOnChange,boardSizeOnChange,mineNum,boardSize})
+    const homePage=HomePage({startGameOnClick,mineNumOnChange,boardSizeOnChange,mineNum,boardSize,a,b})
     const board=Board(boardSize,mineNum,backToHomeOnClick,startGame)
     // ==============Component=============
     return (

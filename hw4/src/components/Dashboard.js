@@ -8,7 +8,6 @@
 
 import React, { useEffect, useState } from 'react';
 import "./css/Dashboard.css"
-let timeIntervalId=setInterval(()=>{},1000)
 export default function Dashboard(remainFlagNum, gameOver,win,startGame) {
   let [time, setTime] = useState(0);
   let [sTime, setSTime] = useState(0);
@@ -20,7 +19,6 @@ export default function Dashboard(remainFlagNum, gameOver,win,startGame) {
   }, [gameOver,win]);
   useEffect(() => {
     if(startGame){
-      console.log('clock')
       let timeIntervalId=setInterval(()=>{
         setTime(time+1)
       },1000)

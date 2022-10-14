@@ -7,13 +7,53 @@
 ****************************************************************************/
 
 import './css/HomePage.css';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNum, boardSize /* -- something more... -- */ }) => {
+const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNum, boardSize,a,b/* -- something more... -- */ }) => {
   const [showPanel, setShowPanel] = useState(false);      // A boolean variable. If true, the controlPanel will show.
-  const [error, setError] = useState(false);              // A boolean variable. If true, means that the numbers of mines and the board size are invalid to build a game.
+  const [error, setError] = useState(false);
+  const [abletostart,setable] =useState(true)
+           // A boolean variable. If true, means that the numbers of mines and the board size are invalid to build a game.
   function Start_button(startGameOnClick){
-    return <button className='btn' onClick={startGameOnClick}>start</button>
+    return <button className='btn' onClick={()=>{if(abletostart){
+      startGameOnClick()
+    }}}>start</button>
+  }
+  class Control_panel extends React.Component{
+    constructor(){
+      super()
+      this.state={
+        mine_value:10,
+        board_value:8
+      }
+    }
+    set_error(){
+      if(this.state.mine_value>this.state.board_value**2){
+        setError(true)
+        setable(false)
+      }
+      else{
+        setError(false)
+        setable(true)
+      }
+    }
+
+    render(){
+      return <div className='controlPanel'>
+      <div className='controlCol'>
+        <p className='controlTitle'>mineNum</p>
+        <input type = 'range' min="1" max="20"  defaultValue="10" onInput={(e)=>{mineNumOnChange(e);
+          this.setState({mine_value:e.target.value});this.set_error()}}></input>
+        {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.mine_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{this.state.mine_value}</p>}
+      </div>
+      <div className='controlCol'>
+        <p className='controlTitle'>boardSize</p>
+        <input type = 'range' min = '1' max = '15' defaultValue = {this.state.board_value}  onInput={(e)=>{boardSizeOnChange(e);
+          this.setState({board_value:e.target.value});this.set_error()}}></input>
+        {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.board_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{this.state.board_value}</p>}
+      </div>
+    </div>
+    }
   }
   function Difficult_button(){
     let click=()=>{
@@ -22,19 +62,19 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
     return <button className='btn' onClick={click}>Difficulty</button>
   }
   function Panel(){
-    function Mine(){
-      return <input type = 'range' min="1" max="20"  defaultValue="10" onInput={mineNumOnChange}></input>
-    }
-    function Board(){
-      return <input type = 'range' min = '1' max = '15' defaultValue = '8'  onInput={boardSizeOnChange}></input>
-    }
+    // function Mine(){
+    //   return <input type = 'range' min="1" max="20"  defaultValue="10" onInput={mineNumOnChange}></input>
+    // }
+    // function Board(){
+    //   return <input type = 'range' min = '1' max = '15' defaultValue = '8'  onInput={boardSizeOnChange}></input>
+    // }
     // let input_1=mine()
     // let input_2=board()
+    
+
     return <div className='controlWrapper'>
-      <p>mineNum</p>
-      <Mine></Mine>
-      <p>boardSize</p>
-      <Board></Board>
+      <div className='error'>{error?<p style={{color:'#880000'}}>please reset</p>:""}</div>
+      <Control_panel></Control_panel>
     </div>
   }
    
@@ -47,10 +87,6 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
         <Difficult_button></Difficult_button>
         {showPanel?<Panel></Panel>:<div></div>}
       </div>
-      {/* Advanced TODO: Implementation of Difficult Adjustment
-                Useful Hint: <input type = 'range' min = '...' max = '...' defaultValue = '...'> 
-                Useful Hint: Error color: '#880000', default text color: '#0f0f4b', invisible color: 'transparent' 
-                Reminder: The defaultValue of 'mineNum' is 10, and the defaultValue of 'boardSize' is 8. */}
 
     </div>
   );
