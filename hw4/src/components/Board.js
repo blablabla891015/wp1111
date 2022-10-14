@@ -64,12 +64,16 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
         // Deep copy of a state
         let newBoard = JSON.parse(JSON.stringify(board));
         let newFlagNum = remainFlagNum;
-        console.log(remainFlagNum)
-        if(remainFlagNum>0 && !board[x][y].revealed){
+        if(remainFlagNum>0 && !board[x][y].revealed && !board[x][y].flagged ){
             newFlagNum=remainFlagNum-1
             console.log(newBoard[x][y].flagged)
             newBoard[x][y].flagged=true
             console.log(newBoard[x][y].flagged)
+        }
+        else if(!board[x][y].revealed &&board[x][y].flagged){
+
+            newFlagNum=remainFlagNum+1
+            newBoard[x][y].flagged=false
         }
         setBoard(newBoard)
         setRemainFlagNum(newFlagNum)
