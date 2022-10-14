@@ -22,11 +22,23 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
     const [gameOver, setGameOver] = useState(false);            // A boolean variable. If true, means you lose the game (Game over).
     const [remainFlagNum, setRemainFlagNum] = useState(0);      // An integer variable to store the number of remain flags.
     const [win, setWin] = useState(false);                      // A boolean variable. If true, means that you win the game.
-
+    const [cell_list,setCelllist]=useState([])
     useEffect(() => {
         // Calling the function
+        console.log('check')
         freshBoard();
     }, []);
+    useEffect(() => {
+        // Calling the function
+        console.log('check2')
+        freshBoard();
+    }, [boardSize,mineNum]);
+    useEffect(() => {
+        // Calling the function
+        if(board.length>0){
+        setCelllist(Cell_list(board))
+        }
+    }, [board]);
 
     // Creating a board
     const freshBoard = () => {
@@ -67,30 +79,30 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
         // Update board and remainFlagNum in the end
 
     };
-    var newBoard = JSON.parse(JSON.stringify(board));
-    var Count=0
-    const smart=(x,y)=>{
-        Count++
-        console.log(Count)
-        newBoard[x][y].revealed=true
-        if(newBoard[x][y].value===0){
-            if(x<boardSize-1 && !newBoard[x+1][y].revealed && !newBoard[x+1][y].flagged){
-                    smart(x+1,y)
-            }
-            if(y<boardSize-1 && !newBoard[x][y+1].revealed && !newBoard[x][y+1].flagged){
-                    smart(x,y+1)
-            }
-            if(x>0 && !newBoard[x-1][y].revealed && !newBoard[x-1][y].flagged){
-                    smart(x-1,y)
-            }
-            if(y>0 && !newBoard[x][y-1].revealed && !newBoard[x][y-1].flagged){
-                    smart(x,y-1)
-            }
-        }
-    }
+    // var newBoard = JSON.parse(JSON.stringify(board));
+    // var Count=0
+    // const smart=(x,y)=>{
+    //     Count++
+    //     console.log(Count)
+    //     newBoard[x][y].revealed=true
+    //     if(newBoard[x][y].value===0){
+    //         if(x<boardSize-1 && !newBoard[x+1][y].revealed && !newBoard[x+1][y].flagged){
+    //                 smart(x+1,y)
+    //         }
+    //         if(y<boardSize-1 && !newBoard[x][y+1].revealed && !newBoard[x][y+1].flagged){
+    //                 smart(x,y+1)
+    //         }
+    //         if(x>0 && !newBoard[x-1][y].revealed && !newBoard[x-1][y].flagged){
+    //                 smart(x-1,y)
+    //         }
+    //         if(y>0 && !newBoard[x][y-1].revealed && !newBoard[x][y-1].flagged){
+    //                 smart(x,y-1)
+    //         }
+    //     }
+    // }
     const revealCell = (x, y) => {
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
-        // var newBoard = JSON.parse(JSON.stringify(board));
+        let newBoard = JSON.parse(JSON.stringify(board));
         for(let i=0;i<mineLocations.length;i++){
             if(x===mineLocations[i][0] && y===mineLocations[i][1]){
                 setGameOver(true)
@@ -99,6 +111,26 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
         
         // newBoard[x][y].revealed=true
         // =======smart=======
+        var Count=0
+        const smart=(x,y)=>{
+            Count++
+            console.log(Count)
+            newBoard[x][y].revealed=true
+            if(newBoard[x][y].value===0){
+                if(x<boardSize-1 && !newBoard[x+1][y].revealed && !newBoard[x+1][y].flagged){
+                        smart(x+1,y)
+                }
+                if(y<boardSize-1 && !newBoard[x][y+1].revealed && !newBoard[x][y+1].flagged){
+                        smart(x,y+1)
+                }
+                if(x>0 && !newBoard[x-1][y].revealed && !newBoard[x-1][y].flagged){
+                        smart(x-1,y)
+                }
+                if(y>0 && !newBoard[x][y-1].revealed && !newBoard[x][y-1].flagged){
+                        smart(x,y-1)
+                }
+            }
+        }
         smart(x,y)
         // ========smart=======
         setBoard(newBoard)
@@ -118,7 +150,8 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
 
 
     // ==============new component==========
-    const Cell_list =()=>{
+    const Cell_list =(board)=>{
+        console.log(board)
         let res_list=[]
         for(let x=0;x<boardSize;x++){
             let subrow=[]
@@ -133,9 +166,7 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
                 {subrow}
             </div>)
         }
-        return <div>
-            {res_list}
-        </div>
+        return res_list
     }
     const Dash=Dashboard(remainFlagNum,gameOver,win,startGame)
     return (
@@ -144,7 +175,7 @@ const Board = ( boardSize, mineNum, backToHome,startGame) => {
                 <div className='boardWrapper' >
                     <div className='boardContainer'>
                         {Dash}
-                        <Cell_list></Cell_list>
+                        {cell_list}
                     </div>
                 </div>
             </div>

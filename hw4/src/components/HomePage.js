@@ -23,10 +23,10 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
   }
   function Panel(){
     function Mine(){
-      return <input type = 'range' min="1" max="20"  defaultValue="10" ></input>
+      return <input type = 'range' min="1" max="20"  defaultValue="10" onInput={mineNumOnChange}></input>
     }
     function Board(){
-      return <input type = 'range' min = '1' max = '15' defaultValue = '8'  ></input>
+      return <input type = 'range' min = '1' max = '15' defaultValue = '8'  onInput={boardSizeOnChange}></input>
     }
     // let input_1=mine()
     // let input_2=board()
