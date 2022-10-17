@@ -53,7 +53,7 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
       </div>
       <div className='controlCol'>
         <p className='controlTitle'>boardSize</p>
-        <input type = 'range' min = '1' max = '15' defaultValue = {y}  onInput={(e)=>{boardSizeOnChange(e);
+        <input type = 'range' min = '1' max = '40' defaultValue = {y}  onInput={(e)=>{boardSizeOnChange(e);
           this.setState({board_value:e.target.value});this.set_error();this.setN()}}></input>
         {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.board_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{y}</p>}
       </div>
