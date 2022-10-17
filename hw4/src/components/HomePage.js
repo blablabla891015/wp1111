@@ -42,7 +42,7 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
       return <div className='controlPanel'>
       <div className='controlCol'>
         <p className='controlTitle'>mineNum</p>
-        <input type = 'range' min="1" max="20"  defaultValue="10" onInput={(e)=>{mineNumOnChange(e);
+        <input type = 'range' min="1" max="20"  defaultValue={this.state.mine_value} onInput={(e)=>{mineNumOnChange(e);
           this.setState({mine_value:e.target.value});this.set_error()}}></input>
         {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.mine_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{this.state.mine_value}</p>}
       </div>
@@ -71,7 +71,7 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
     // let input_1=mine()
     // let input_2=board()
     
-
+    // let con=new Control_panel()
     return <div className='controlWrapper'>
       <div className='error'>{error?<p style={{color:'#880000'}}>please reset</p>:""}</div>
       <Control_panel></Control_panel>
