@@ -8,7 +8,8 @@
 
 import './css/HomePage.css';
 import React, { useEffect, useRef, useState } from 'react';
-
+var x=10
+var y=8
 const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNum, boardSize,a,b/* -- something more... -- */ }) => {
   const [showPanel, setShowPanel] = useState(false);      // A boolean variable. If true, the controlPanel will show.
   const [error, setError] = useState(false);
@@ -37,20 +38,24 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
         setable(true)
       }
     }
+    setN(){
+      x=this.state.mine_value
+      y=this.state.board_value
+    }
 
     render(){
       return <div className='controlPanel'>
       <div className='controlCol'>
         <p className='controlTitle'>mineNum</p>
-        <input type = 'range' min="1" max="20"  defaultValue={this.state.mine_value} onInput={(e)=>{mineNumOnChange(e);
-          this.setState({mine_value:e.target.value});this.set_error()}}></input>
-        {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.mine_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{this.state.mine_value}</p>}
+        <input type = 'range' min="1" max="20"  defaultValue={x} onInput={(e)=>{mineNumOnChange(e);
+          this.setState({mine_value:e.target.value});this.set_error();this.setN()}}></input>
+        {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.mine_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{x}</p>}
       </div>
       <div className='controlCol'>
         <p className='controlTitle'>boardSize</p>
-        <input type = 'range' min = '1' max = '15' defaultValue = {this.state.board_value}  onInput={(e)=>{boardSizeOnChange(e);
-          this.setState({board_value:e.target.value});this.set_error()}}></input>
-        {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.board_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{this.state.board_value}</p>}
+        <input type = 'range' min = '1' max = '15' defaultValue = {y}  onInput={(e)=>{boardSizeOnChange(e);
+          this.setState({board_value:e.target.value});this.set_error();this.setN()}}></input>
+        {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.board_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{y}</p>}
       </div>
     </div>
     }
