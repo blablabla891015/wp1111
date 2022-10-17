@@ -29,7 +29,7 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
       }
     }
     set_error(){
-      if(this.state.mine_value>this.state.board_value**2){
+      if(x>y**2){
         setError(true)
         setable(false)
       }
@@ -48,13 +48,13 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
       <div className='controlCol'>
         <p className='controlTitle'>mineNum</p>
         <input type = 'range' min="1" max="20"  defaultValue={x} onInput={(e)=>{mineNumOnChange(e);
-          this.setState({mine_value:e.target.value});this.set_error();this.setN()}}></input>
+          this.setState({mine_value:e.target.value});this.setN();this.set_error()}}></input>
         {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.mine_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{x}</p>}
       </div>
       <div className='controlCol'>
         <p className='controlTitle'>boardSize</p>
         <input type = 'range' min = '1' max = '40' defaultValue = {y}  onInput={(e)=>{boardSizeOnChange(e);
-          this.setState({board_value:e.target.value});this.set_error();this.setN()}}></input>
+          this.setState({board_value:e.target.value});this.setN();this.set_error()}}></input>
         {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.board_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{y}</p>}
       </div>
     </div>
