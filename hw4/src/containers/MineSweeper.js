@@ -32,15 +32,14 @@ const MineSweeper = () => {
     
     // Advanced TODO: Change `mineNum` to the number you send by this function
     const mineNumOnChange = (e) => {
-        a=e.target.value
-        // setMineNum(e.target.value)
+        setMineNum(e.target.value)
         
     }
 
     // Advanced TODO: Change `boardSize` to the number you send by this function
     const boardSizeOnChange = (e) => {
-        b=e.target.value
-        // setBoardSize(e.target.value)
+        // b=e.target.value
+        setBoardSize(e.target.value)
         
     }
 

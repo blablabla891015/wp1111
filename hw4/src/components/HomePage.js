@@ -47,8 +47,7 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
       return <div className='controlPanel'>
       <div className='controlCol'>
         <p className='controlTitle'>mineNum</p>
-        <input type = 'range' min="1" max="20"  defaultValue={x} onInput={(e)=>{mineNumOnChange(e);
-          this.setState({mine_value:e.target.value});this.setN();this.set_error()}}></input>
+        <input type = 'range' min="1" max="20"  defaultValue={x} onChange={(e)=>{mineNum=e.target.value; mineNumOnChange(mineNum)}}></input>
         {!error?<p className='controlNum' style={{color:"#0f0f4b"}}>{this.state.mine_value}</p>:<p className='controlNum' style={{color:"#880000"}}>{x}</p>}
       </div>
       <div className='controlCol'>
@@ -61,10 +60,21 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
     }
   }
   function Difficult_button(){
+    const abc=useRef()
     let click=()=>{
       setShowPanel(true)
+      console.log(abc.current)
     }
-    return <button className='btn' onClick={click}>Difficulty</button>
+    return <button className='btn'  type='range' ref={abc}onChange={()=>{click()}}>Difficulty</button>
+  }
+  function Abcd(){
+    const abc=useRef()
+    let click=()=>{
+      // setShowPanel(true)
+      console.log(abc.current.value)
+    }
+    return <input type="range" ref={abc} onChange={()=>{click()}}></input>
+
   }
   function Panel(){
     // function Mine(){
@@ -89,6 +99,7 @@ const HomePage = ({ startGameOnClick, mineNumOnChange, boardSizeOnChange, mineNu
       <p className='title'>MineSweeper</p>
       {start_button}
       <div className='contralContainer'>
+        <Abcd></Abcd>
         <Difficult_button></Difficult_button>
         {showPanel?<Panel></Panel>:<div></div>}
       </div>
