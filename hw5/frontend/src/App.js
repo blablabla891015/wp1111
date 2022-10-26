@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import { guess, startGame, restart } from './axios'
 function App() {
   const [hasStarted, setHasStarted] = useState(false)
   const [hasWon, setHasWon] = useState(false)
   const [number, setNumber] = useState('')
   const [status, setStatus] = useState('')
+  const InputRef=useRef(null)
   const handleStart=async()=>{
     const response=await startGame()
     console.log(response)
@@ -21,9 +21,9 @@ function App() {
     setStatus(response)
     setNumber('')
     }
+    InputRef.current.value=''
   }
   const handleInput=(e)=>{
-    console.log(e.target.value)
     setNumber(e.target.value)
   }
   const handleRestart=async()=>{
@@ -39,7 +39,7 @@ function App() {
 
   const gameMode =<>
  <p>Guess a number between 1 to 100</p>
- <input onChange={handleInput}></input>
+ <input onChange={handleInput} ref={InputRef}></input>
  <button // Send number to backend
  onClick={handleGuess}
  disabled={!number}

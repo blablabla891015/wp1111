@@ -12,16 +12,12 @@ router.get('/guess',(req,res)=>{
     console.log(typeof guess_number)
     if(guess_number>0 && guess_number<101){
         if(the_number>guess_number){
-            console.log('bigger')
-            // res.status(100).send({msg:'Bigger !'})
             res.json({msg:'Bigger !'})
         }
         else if(the_number<guess_number){
-            // res.status(100).send({msg:'Smaller !'})
             res.json({msg:'Smaller !'})
         }
         else{
-            // res.status(100).send({msg:'Equal'})
             res.json({msg:'Equal'})
         }
     }
