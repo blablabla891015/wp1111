@@ -1,8 +1,18 @@
 import axios from 'axios'
 const instance = axios.create({ baseURL: 'http://localhost:4000/api/guess' })
 const startGame = async () => {
- const { data: { msg } }= await instance.post('/start')
- return msg
+   try {
+      const { data: { msg } } = await instance.post('/start')
+      return msg
+   }
+   catch (error) {
+      try{
+         return 'Error : '+error['response']['status']+" "+error['response']['data']['msg']
+      }
+      catch(error2){
+         return 'Error : 503 '+error['message']
+      }
+   }
 }
 const guess = async (number) => {
  try {
@@ -10,12 +20,27 @@ const guess = async (number) => {
     return msg
  }
  catch (error) {
-    return "Not a valid number"
+   try{
+      return 'Error : '+error['response']['status']+" "+error['response']['data']['msg']
+   }
+   catch(error2){
+      return 'Error : 503 '+error['message']
+   }
  }
 }
 const restart = async ()=>{
-    const { data: { msg } }= await instance.post('/restart')
-    return msg
+   try {
+      const { data: { msg } } = await instance.post('/restart')
+      return msg
+   }
+   catch (error) {
+      try{
+         return 'Error : '+error['response']['status']+" "+error['response']['data']['msg']
+      }
+      catch(error2){
+         return 'Error : 503 '+error['message']
+      }
+   }
 }
 
 export { startGame, guess, restart }

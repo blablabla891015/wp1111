@@ -6,12 +6,16 @@ function App() {
   const [hasWon, setHasWon] = useState(false)
   const [number, setNumber] = useState('')
   const [status, setStatus] = useState('')
+  const [startError,setStartError] =useState('')
   const InputRef=useRef(null)
   const handleStart=async()=>{
     const response=await startGame()
     console.log(response)
     if(response==='The game has started'){
       setHasStarted(true)
+    }
+    else{
+      setStartError(response)
     }
   }
   const handleGuess = async() => {
@@ -35,7 +39,12 @@ function App() {
     }
 
   }
-  const startMenu =<div><button onClick = {handleStart} > start game </button></div>
+  const startMenu =<div>
+    <button onClick = {handleStart} >
+    start game
+  </button>
+  <p>{startError}</p>
+  </div>
 
   const gameMode =<>
  <p>Guess a number between 1 to 100</p>
