@@ -1,5 +1,7 @@
 import express from 'express'
-import {genNumber,getNumber} from '../core/getNumber'
+import {genNumber,getNumber,computerGuess,updateMax,updateMin} from '../core/getNumber'
+
+
 const router=express.Router()
 router.post('/start',(_,res)=>{
     genNumber()
@@ -9,13 +11,28 @@ router.get('/guess',(req,res)=>{
     let the_number=getNumber()
     
     let guess_number=req.query.number
-    console.log(typeof guess_number)
     if(guess_number>0 && guess_number<101){
         if(the_number>guess_number){
-            res.json({msg:'Bigger !'})
+            // let com_guess=computerGuess()
+            updateMin(guess_number)
+            let com_guess=computerGuess()
+            if(com_guess===the_number){
+                res.json({msg:'computer win'})
+            }
+            else{
+                res.json({msg:'Bigger !'+com_guess.toString()})
+            }
         }
         else if(the_number<guess_number){
-            res.json({msg:'Smaller !'})
+            // let com_guess=computerGuess()
+            updateMax(guess_number)
+            let com_guess=computerGuess()
+            if(com_guess===the_number){
+                res.json({msg:'computer win'})
+            }
+            else{
+                res.json({msg:'Smaller !'+com_guess.toString()})
+            }
         }
         else{
             res.json({msg:'Equal'})
