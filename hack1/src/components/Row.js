@@ -15,17 +15,18 @@ const Row = ({ guess, rowIdx }) => {
     const [classname,setClassname]=useState('Row-wordbox')
     const [letters,setLetters]=useState([])
     let x=[0,1,2,3,4]
-    useEffect(()=>{
-        setClassname('Row-wordbox filled')
-        // console.log(letters)
-    },[filled]
+    // useEffect(()=>{
+    //     setClassname('Row-wordbox grey')
+    //     // console.log(letters)
+    // },[filled]
 
-    )
+    // )
     // let classname='Row-wordbox'
     if(guess !== undefined && !filled && guess!==null){
         console.log(guess)
         setFilled(true)
         if(guess!==null){
+            setClassname('Row-wordbox grey')
             setLetters(guess)
         }
     }
