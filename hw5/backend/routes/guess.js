@@ -20,7 +20,7 @@ router.get('/guess',(req,res)=>{
                 res.json({msg:'computer win'})
             }
             else{
-                res.json({msg:'Bigger !'+com_guess.toString()})
+                res.json({msg:'Bigger ! and computer guess '+com_guess.toString()})
             }
         }
         else if(the_number<guess_number){
@@ -31,7 +31,7 @@ router.get('/guess',(req,res)=>{
                 res.json({msg:'computer win'})
             }
             else{
-                res.json({msg:'Smaller !'+com_guess.toString()})
+                res.json({msg:'Smaller ! and computer guess '+com_guess.toString()})
             }
         }
         else{
