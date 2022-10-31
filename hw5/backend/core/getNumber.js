@@ -9,13 +9,16 @@ const genNumber=()=>{
 }
 
 const getNumber=()=>{
+    if(number===undefined){
+        number= Math.floor(Math.random() * 99)+1 //0~100
+        max=100
+        min=1
+    }
+    console.log(number)
     return number
 }
 const computerGuess=()=>{
-    console.log('max is'+max.toString())
-    console.log('min is'+min.toString())
     let res=Math.floor(Math.random()*(max - min)+min)
-    console.log(res)
     return res
 }
 const updateMax=(new_max)=>{
