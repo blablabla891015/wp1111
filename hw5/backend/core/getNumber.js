@@ -14,7 +14,6 @@ const getNumber=()=>{
         max=100
         min=1
     }
-    console.log(number)
     return number
 }
 const computerGuess=()=>{
