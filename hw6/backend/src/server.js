@@ -1,16 +1,17 @@
 import express from 'express'; 
-import mongoose from 'mongoose';
+import cors from 'cors'
+// import mongoose from 'mongoose';
+import db from './routes/db'
+import routes from './routes'; 
+db.connect()
 const app = express();
 const port = process.env.PORT || 4000;
-mongoose
- .connect('mongodb+srv://blablabla891015:891015Ben@cluster0.ptrzaca.mongodb.net/?retryWrites=true&w=majority', {
- useNewUrlParser: true,
- useUnifiedTopology: true,
- })
- .then((res) => console.log("mongo db connection created"));
-app.get('/', (req, res) => {
- res.send('Hello, World!');
-});
+
+
+app.use(cors());
+app.use(express.json());
+app.use('/', routes);
+
 app.listen(port, () =>
- console.log(`scorecard app listening on port ${port}!`),
+ console.log(`Example app listening on port ${port}!`),
 );

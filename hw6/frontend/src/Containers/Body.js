@@ -56,11 +56,10 @@ const Body = () => {
   const handleAdd = async () => {
     const {
       data: { message, card },
-    } = await axios.post('/card', {
-      name,
+    } = await axios.post('/card', {name,
       subject,
-      score,
-    });
+      score}
+    );
 
     if (!card) addErrorMessage(message);
     else addCardMessage(message);
