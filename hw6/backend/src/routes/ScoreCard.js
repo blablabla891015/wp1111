@@ -20,14 +20,14 @@ router.post("/card", async(req,res)=>{
     const existing=await ScoreCard.findOne({name:name,subject:subject})
     if (existing){
         await ScoreCard.findOneAndUpdate({name:name,subject:subject},{score:score})
-        res.json({message:"updating:("+ name+' , '+subject+' , '+score+')',card:true})
+        res.json({message:"updating("+ name+' , '+subject+' , '+score+')',card:true})
 
         
     }
     else{
         try{
             await saveScoreCard( name,subject,score);
-            res.json({message:"adding name, Subject, Score)",card:true})}
+            res.json({message:"adding(" +name+' , '+subject+' , '+ score+")",card:true})}
         catch(e){
             console.log(e)
         }
