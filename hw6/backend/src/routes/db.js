@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv-defaults';
+import dotenv from 'dotenv-defaults'; 
+dotenv.config()
 export default {
  connect: () => {mongoose
-    .connect('mongodb+srv://blablabla891015:891015Ben@cluster0.ptrzaca.mongodb.net/?retryWrites=true&w=majority', {
+    .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     })

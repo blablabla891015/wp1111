@@ -3,8 +3,7 @@ import ScoreCard from "./Card";
 import mongoose from "mongoose";
 const db = mongoose.connection
 db.once("open", async () => {
-    // await saveScoreCard(57, "Ric",'math',100);
-    // await deleteDB()
+    await deleteDB()
     console.log('check')
    });
 const router = Router();
