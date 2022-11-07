@@ -55,6 +55,9 @@ router.get('/cards', async(req,res)=>{
             for(let i=0;i<query_list.length;i++){
                 messages.push('Find card with subject:( '+query_list[i]['name'].toString()+" , "+query_list[i]['subject'].toString()+' , '+query_list[i]['score'].toString()+')')
             }
+            if(messages.length===0){
+                res.json({messages:[type+'('+queryString+') not found!'],message:true})
+            }
             res.json({messages:messages,message:true})
         }
     }
