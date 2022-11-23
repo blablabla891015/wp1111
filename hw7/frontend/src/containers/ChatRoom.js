@@ -100,7 +100,7 @@ const ChatRoom=()=>{
         }
       }
       console.log(chatBoxes)
-      // setChatBoxes(chatBoxes)
+      setChatBoxes(chatBoxes)
     },[messages]
     )
     // useEffect(()=>{
