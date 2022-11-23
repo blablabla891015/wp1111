@@ -9,7 +9,12 @@ const MessageSchema = new Schema({
  body: {
  type: String,
  required: [true, 'Body field is required.']
- }
+ },
+ sender:{
+    type:String,
+    required: [true, 'Body field is required.']
+ },
+ chatBox: { type: mongoose.Types.ObjectId, ref: 'ChatBox' },
 })
 // Creating a table within database with the defined schema
 const Message = mongoose.model('message', MessageSchema)

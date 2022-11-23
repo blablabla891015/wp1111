@@ -11,12 +11,12 @@ const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 const db = mongoose.connection
 db.once('open', () => {
- console.log("MongoDB connected!");
- wss.on('connection', (ws) => {
-   
-   ws.onmessage=wsConnect.onMessage(ws)
- 
- });
+  console.log("MongoDB connected!");
+  wss.on('connection', (ws) => {
+    ws.box = '';
+    ws.onmessage=wsConnect.onMessage(ws)
+  
+  });
 }); 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => { console.log('server on')});

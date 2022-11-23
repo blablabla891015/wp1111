@@ -9,6 +9,9 @@ const ChatContext = createContext({
    messages: [],
    sendMessage: () => {},
    clearMessages: () => {},
+   displayStatus:()=>{},
+   startChat:()=>{},
+   setMessages:()=>{}
   });
 const ChatProvider = (props) => {
    const [Me,setMe]=useState(saveMe || '')
@@ -22,22 +25,45 @@ const ChatProvider = (props) => {
       const [task, payload] = JSON.parse(data); 
       switch (task) {
          case "output": {
-         setMessages(() => 
-         [...messages, ...payload]); break; }
-         case 'status':{
-            setStatus(payload);break
+            console.log('output')
+            let m=[]
+            console.log(payload)
+            for(let i=0;i<payload.length;i++){
+               m.push({name:payload[i].users,body:payload[i].msg,sender:payload[i].me})
+
+            }
+            // let m={_id:payload._id,name:payload.name,body:payload.msg,sender:payload.sender}
+            setMessages(() => 
+            [...messages, ...m]); break; }
+            case 'status':{
+               setStatus(payload);
+               break
+         }
+         case 'open':{
+            console.log(messages)
+            setMessages(()=>[...payload]);
+            break
 
          }
          default: break;
          };
       }
+   const makeName = (name, to) => { return [name, to].sort().join('_'); };
    const sendData = async (data) => {
       await client.send(JSON.stringify(data));
    };
-   const sendMessage = (msg) => { 
-      sendData(['input',msg])
+   const sendMessage = (msg,me,to) => { 
+      let data={msg:msg,me:me,users:makeName(me,to)}
+      sendData(['input',data])
       console.log(msg);
    }
+   const startChat = (me,to)=>{
+      // const makeName = (name, to) => { return [name, to].sort().join('_'); };
+      let users=makeName(me,to)
+      sendData(['chat',users])
+      console.log(me,to)
+   }
+   
    const displayStatus = (s) => {
       if (s.msg) {
       const { type, msg } = s;
@@ -62,7 +88,7 @@ const ChatProvider = (props) => {
       <ChatContext.Provider
       value={{
       status, Me, SignIn, messages, setMe, setSignIn,
-      sendMessage, displayStatus
+      sendMessage, displayStatus,startChat,setMessages
       }}
       {...props}
       />
