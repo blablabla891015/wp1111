@@ -18,6 +18,23 @@ const FootRef = styled.div`
 height: 20px;
 `
 ;
+const StyledMessage = styled.div`
+ display: flex;
+ align-items: center;
+ flex-direction: ${({isMe}) => (isMe ? 'row-reverse' : 'row')};
+ margin: 8px 10px;
+ & p:first-child {
+ margin: 0 5px;
+ }
+ & p:last-child {
+ padding: 2px 5px;
+ border-radius: 5px;
+ background: #eee;
+ color: gray;
+ margin: auto 0;
+ }
+`
+;
 const ChatRoom=()=>{
     const { status, messages,sendMessage ,displayStatus,Me,startChat,setMessages} = useChat()
     const [chatBoxes,setChatBoxes]=useState([])
@@ -87,10 +104,13 @@ const ChatRoom=()=>{
       let new_chatBoxes=chatBoxes
       for(let i =0;i<new_chatBoxes.length;i++){
         if(new_chatBoxes[i].key===activeKey){
-          let res=messages.map(({ sender, body }, i) => (
-            <p className="App-message" key={i}>
-            <Tag color="blue">{sender}</Tag> {body}
-            </p>))
+          let res=messages.map(({ sender, body }, i) => {
+            let isMe=false
+            if(sender===Me){
+              isMe=true
+            }
+            return(
+            <StyledMessage isMe={isMe} key={i}> {body}</StyledMessage>)})
           new_chatBoxes[i].children=[...res,footer]
         }
       }
