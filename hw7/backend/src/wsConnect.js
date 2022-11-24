@@ -1,6 +1,6 @@
 import Message from './models/message'
 import ChatBoxModel from './models/checkbox';
-
+import User from './models/user';
 const sendData = (data, ws) => {
     ws.send(JSON.stringify(data)); }
 
@@ -79,10 +79,40 @@ export default {
                 // sendStatus({type: 'success',msg: 'Chatbox opened.'}, ws)
                 break
             }
-            // case '':{
-            //     console.log('check m')
-            //     break
-            // }
+            case 'login':{
+                const user=payload.user
+                const password=payload.password
+                let exist=await User.findOne({user:user,password:password})
+                ///////////////////////
+                // exist=true
+                //////////////////
+                if(exist){
+                    sendData(['login_res','success'],ws)
+                    sendStatus({type: 'success',msg: 'Login.'},ws)
+                }
+                else{
+                    sendData(['login_res','fail'],ws)
+                    sendStatus({type: 'error',msg: 'wrong username or password.'},ws)
+
+                }
+                
+                break
+            }
+            case 'reg':{
+                const user=payload.user
+                const password=payload.password
+                let exist=await User.findOne({user:user})
+                if(exist){
+                    sendStatus({type: 'error',msg: 'user already exist.'},ws)
+                    break
+                }
+                const New_user=new User({user:user,password:password})
+                try { await New_user.save();
+                } catch (e) { throw new Error
+                ("Message DB save error: " + e); }
+                sendStatus({type: 'success',msg: 'reg sucessfully.'},ws)
+                break
+            }
             default:{
                 break
             }

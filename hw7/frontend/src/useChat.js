@@ -5,13 +5,17 @@ const saveMe=localStorage.getItem(LOCALSTORAGE_KEY)
 const ChatContext = createContext({
    status: {},
    Me: "",
+   Password:'',
+   setPassword:()=>{},
    SignIn: false,
    messages: [],
    sendMessage: () => {},
-   clearMessages: () => {},
    displayStatus:()=>{},
    startChat:()=>{},
-   setMessages:()=>{}
+   setMessages:()=>{},
+   setMe:()=>{},
+   sendLogin:()=>{},
+   sendReg:()=>{}
   });
 const client = new WebSocket
 ('ws://localhost:4000')
@@ -21,6 +25,7 @@ const ChatProvider = (props) => {
    const [messages, setMessages] = useState([]);
    const [SignIn,setSignIn]=useState(false);
    const [status, setStatus] = useState({});
+   const [password,setPassword]=useState('')
    // const client = new WebSocket
    // ('ws://localhost:4000')
    client.onmessage = (byteString) => {
@@ -39,15 +44,22 @@ const ChatProvider = (props) => {
 
             setMessages(() => 
             [...messages, ...m]); break; }
-            case 'status':{
-               setStatus(payload);
-               break
+         case 'status':{
+            setStatus(payload);
+            break
          }
          case 'open':{
             // console.log('open')
             setMessages(()=>[...payload]);
             break
-
+         }
+         case 'login_res':{
+            if(payload==='success'){
+               setSignIn(true)
+            }
+            else{
+               setSignIn(false)
+            }
          }
          default: break;
          };
@@ -59,6 +71,12 @@ const ChatProvider = (props) => {
    const sendMessage = (msg,me,to) => { 
       let data={msg:msg,me:me,users:makeName(me,to)}
       sendData(['input',data])
+   }
+   const sendLogin =(user,password)=>{
+      sendData(['login',{user,password}])
+   }
+   const sendReg =(user,password)=>{
+      sendData(['reg',{user,password}])
    }
    const startChat = (me,to)=>{
       // const makeName = (name, to) => { return [name, to].sort().join('_'); };
@@ -73,24 +91,28 @@ const ChatProvider = (props) => {
       content: msg, duration: 0.5 }
       switch (type) {
       case 'success':
-      message.success(content)
-      break
+         message.success(content)
+         break
       case 'error':
+         message.error(content)
+         break
       default:
-      message.error(content)
-      break
+         message.error(content)
+         break
       }}}
    useEffect(()=>{
       if(SignIn){
          localStorage.setItem(LOCALSTORAGE_KEY,Me)
       }
    },[SignIn])
-
+   useEffect(()=>{
+      displayStatus(status)
+   },[status])
    return (
       <ChatContext.Provider
       value={{
       status, Me, SignIn, messages, setMe, setSignIn,
-      sendMessage, displayStatus,startChat,setMessages
+      sendMessage, displayStatus,startChat,setMessages,password,setPassword,sendLogin,sendReg
       }}
       {...props}
       />

@@ -2,15 +2,15 @@ import { UserOutlined } from "@ant-design/icons";
 import { Button, Input, Tag ,message} from 'antd'
 const LogIn = ({me, setName, onLogin}) => {
  return (
- <Input.Search
+ <Input
  size="large"
  style={{ width: 300, margin: 50 }}
  prefix={<UserOutlined />}
  placeholder="Enter your name"
  value={me}
  onChange={(e) => setName(e.target.value)}
- enterButton="Sign In"
- onSearch={(name) => onLogin(name)}
+//  enterButton="Sign In"
+//  onSearch={(name) => onLogin(name)}
  />
  );}
 export default LogIn;

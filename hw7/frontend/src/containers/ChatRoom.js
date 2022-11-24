@@ -65,12 +65,6 @@ const ChatRoom=()=>{
         : activeKey
         : '';
         };
-    // const renderChat = (chat) => (console.log("abc")); //backend  ......
-    // const extractChat = (friend) => {
-    // return renderChat
-    // (messages.filter
-    // (({name, body}) => ((name === friend) || (name === Me))));
-    // }
 
   
     const createChatBox = (friend) => {
@@ -79,8 +73,6 @@ const ChatRoom=()=>{
         throw new Error(friend +
         "'s chat box has already opened.");
         }
-        //  const chat = startChat(Me,friend);
-        // console.log(abc)
         setChatBoxes([...chatBoxes,
         { label: friend, children: <></>,
         key: friend }]);
@@ -100,7 +92,6 @@ const ChatRoom=()=>{
     useEffect(() => {
     displayStatus(status)}, [status])
     useEffect(()=>{
-      // console.log(messages)
       let new_chatBoxes=chatBoxes
       for(let i =0;i<new_chatBoxes.length;i++){
         if(new_chatBoxes[i].key===activeKey){
@@ -115,7 +106,6 @@ const ChatRoom=()=>{
         }
       }
       setMsgSent(true)
-      // console.log(chatBoxes)
       setChatBoxes(new_chatBoxes)
     },[messages]
     )
@@ -123,18 +113,10 @@ const ChatRoom=()=>{
       scrollToBottom();
       setMsgSent(false);
       }, [msgSent]);
-    // useEffect(()=>{
-    //   setMessages(()=>[])
-    // },[messages])
-    // useEffect(() => {
-    //   console.log(messages)}, [messages])
     return(
       <>
       <div className="App-title">
-        <h1>Simple Chat</h1>
-        <Button type="primary" danger >
-          Clear
-        </Button>
+        <h1>{Me}'s ChatRoom</h1>
       </div>
       <ChatBoxesWrapper items={chatBoxes} onEdit={onEdit} type="editable-card" onChange={chatboxonChange}>
       {messages.length === 0 ? (
@@ -156,12 +138,6 @@ const ChatRoom=()=>{
             onCancel={() => { setModalOpen(false);}}>
 
       </ChatModal>
-      {/* <Input
-      placeholder="Username"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-      style={{ marginBottom: 10 }}
-      ></Input> */}
       <Input.Search
       value={body}
       onChange={(e) => setBody(e.target.value)}
