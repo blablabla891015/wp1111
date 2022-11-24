@@ -10,11 +10,11 @@ const app = express()
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 const db = mongoose.connection
-db.once('open', () => {
+db.once('open', (ws) => {
   console.log("MongoDB connected!");
   wss.on('connection', (ws) => {
     ws.box = '';
-    ws.onmessage=wsConnect.onMessage(ws)
+    ws.onmessage=wsConnect.onMessage(ws,wss)
   
   });
 }); 

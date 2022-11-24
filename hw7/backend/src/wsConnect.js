@@ -7,6 +7,18 @@ const sendData = (data, ws) => {
 const sendStatus = (payload, ws) => {
 sendData(["status", payload], ws); }
 
+const broadcastMessage = (wss, data, status,name) => {
+    wss.clients.forEach((client) => {
+        // console.log(client.box)
+        if (client.box===name){
+            sendData(data, client);
+            sendStatus(status, client);
+
+        }
+        // sendData(data, client);
+        // sendStatus(status, client);
+    });
+   };
 const validateChatBox = async (name, participants) => {
     let box = await ChatBoxModel.findOne({ name });
     if (!box){box = await new ChatBoxModel({ name, users: participants }).save();}
@@ -16,7 +28,7 @@ const validateChatBox = async (name, participants) => {
     return msgs
    };
 export default {
-    onMessage: (ws) => (
+    onMessage: (ws,wss) => (
         async (byteString) => {
         const { data } = byteString
         const [task, payload] = JSON.parse(data)
@@ -26,7 +38,7 @@ export default {
                 const name=payload.users
                 const body=payload.msg
                 const sender=payload.me
-
+                ws.box=name
 
                 ChatBoxModel.find({'name':name},async(err,chatboxes)=>{
                     if(err || chatboxes.length!==1){
@@ -47,11 +59,11 @@ export default {
                         try { await message.save();
                         } catch (e) { throw new Error
                         ("Message DB save error: " + e); }
-                        sendData(['output', [payload]], ws)
-                        sendStatus({
-                        type: 'success',
-                        msg: 'Message sent.'
-                        }, ws)
+                        broadcastMessage(wss,['output', [payload]],{type: 'success',msg: 'Message sent.'},name)
+                        // sendData(['output', [payload]], ws)
+                        // sendStatus({
+                        // type: 'success',
+                        // msg: 'Message sent.'}, ws)
                     }
                 })
                 
@@ -60,12 +72,11 @@ export default {
             case 'chat':{
                 let users=payload.split('_')
                 let msgs=await validateChatBox(payload,users)
-                sendData(['open',msgs],ws)
+                ws.box=payload
+                broadcastMessage(wss,['open',msgs],{type: 'success',msg: 'Chatbox opened.'},payload)
+                // sendData(['open',msgs],ws)
 
-                sendStatus({
-                    type: 'success',
-                    msg: 'Chatbox opened.'
-                    }, ws)
+                // sendStatus({type: 'success',msg: 'Chatbox opened.'}, ws)
                 break
             }
             // case '':{

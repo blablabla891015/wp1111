@@ -13,26 +13,30 @@ const ChatContext = createContext({
    startChat:()=>{},
    setMessages:()=>{}
   });
+const client = new WebSocket
+('ws://localhost:4000')
 const ChatProvider = (props) => {
    const [Me,setMe]=useState(saveMe || '')
+   // console.log('check')
    const [messages, setMessages] = useState([]);
    const [SignIn,setSignIn]=useState(false);
    const [status, setStatus] = useState({});
-   const client = new WebSocket
-   ('ws://localhost:4000')
+   // const client = new WebSocket
+   // ('ws://localhost:4000')
    client.onmessage = (byteString) => {
       const { data } = byteString;
       const [task, payload] = JSON.parse(data); 
       switch (task) {
          case "output": {
-            console.log('output')
+            console.log(messages)
+            console.log('paylaod',payload)
             let m=[]
-            console.log(payload)
             for(let i=0;i<payload.length;i++){
                m.push({name:payload[i].users,body:payload[i].msg,sender:payload[i].me})
 
             }
             // let m={_id:payload._id,name:payload.name,body:payload.msg,sender:payload.sender}
+
             setMessages(() => 
             [...messages, ...m]); break; }
             case 'status':{
@@ -40,7 +44,7 @@ const ChatProvider = (props) => {
                break
          }
          case 'open':{
-            console.log(messages)
+            // console.log('open')
             setMessages(()=>[...payload]);
             break
 
@@ -50,18 +54,16 @@ const ChatProvider = (props) => {
       }
    const makeName = (name, to) => { return [name, to].sort().join('_'); };
    const sendData = async (data) => {
-      await client.send(JSON.stringify(data));
+      client.send(JSON.stringify(data));
    };
    const sendMessage = (msg,me,to) => { 
       let data={msg:msg,me:me,users:makeName(me,to)}
       sendData(['input',data])
-      console.log(msg);
    }
    const startChat = (me,to)=>{
       // const makeName = (name, to) => { return [name, to].sort().join('_'); };
       let users=makeName(me,to)
       sendData(['chat',users])
-      console.log(me,to)
    }
    
    const displayStatus = (s) => {

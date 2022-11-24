@@ -1,5 +1,5 @@
 
-import { useState ,useEffect } from 'react'
+import { useState ,useEffect, useRef } from 'react'
 import { Button, Input, Tag ,message,Tabs} from 'antd'
 import {useChat} from '../useChat'
 import styled from 'styled-components'
@@ -14,14 +14,25 @@ const ChatBoxesWrapper=styled(Tabs)`
     padding: 20px;
     overflow: auto;
   `
-
+const FootRef = styled.div`
+height: 20px;
+`
+;
 const ChatRoom=()=>{
     const { status, messages,sendMessage ,displayStatus,Me,startChat,setMessages} = useChat()
     const [chatBoxes,setChatBoxes]=useState([])
     const [activeKey, setActiveKey]=useState('')
+    const [msgSent,setMsgSent]=useState(false)
     // const [username, setUsername] = useState('')
     const [body, setBody] = useState('')
     const [modalOpen, setModalOpen] = useState(false);
+    const msgFooter=useRef(null)
+
+    const footer=<FootRef ref={msgFooter} key='footer'></FootRef>
+    const scrollToBottom = () => {
+      msgFooter.current?.scrollIntoView
+      ({ behavior: 'smooth', block: "start" });
+      };
     const removeChatBox =
         (targetKey, activeKey) => {
         const index = chatBoxes.findIndex
@@ -56,7 +67,7 @@ const ChatRoom=()=>{
         setChatBoxes([...chatBoxes,
         { label: friend, children: <></>,
         key: friend }]);
-      //  setMsgSent(true);
+        setMsgSent(true);
         return friend;
       };
     const onEdit=(targetKey, action) => {
@@ -72,37 +83,26 @@ const ChatRoom=()=>{
     useEffect(() => {
     displayStatus(status)}, [status])
     useEffect(()=>{
-      // console.log('check')
-      // let new_chatBoxes=chatBoxes
-      // for(let i =0;i<new_chatBoxes.length;i++){
-      //   if(new_chatBoxes[i].key===activeKey){
-      //     console.log(messages.map(({ sender, body }, i) => (
-      //       <p className="App-message" key={i}>
-      //       <Tag color="blue">{sender}</Tag> {body}
-      //       </p>)))
-      //     // new_chatBoxes[i].children=messages.map(({ sender, body }, i) => (
-      //     //   <p className="App-message" key={i}>
-      //     //   <Tag color="blue">{sender}</Tag> {body}
-      //     //   </p>))
-      //   }
-      // }
-      // console.log('check bug')
-      // setChatBoxes(new_chatBoxes)
-      // console.log(new_chatBoxes)
-
+      // console.log(messages)
       
       for(let i =0;i<chatBoxes.length;i++){
         if(chatBoxes[i].key===activeKey){
-          chatBoxes[i].children=messages.map(({ sender, body }, i) => (
+          let res=messages.map(({ sender, body }, i) => (
             <p className="App-message" key={i}>
             <Tag color="blue">{sender}</Tag> {body}
             </p>))
+          chatBoxes[i].children=[...res,footer]
         }
       }
-      console.log(chatBoxes)
+      setMsgSent(true)
+      // console.log(chatBoxes)
       setChatBoxes(chatBoxes)
     },[messages]
     )
+    useEffect(() => {
+      scrollToBottom();
+      setMsgSent(false);
+      }, [msgSent]);
     // useEffect(()=>{
     //   setMessages(()=>[])
     // },[messages])
