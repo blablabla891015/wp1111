@@ -84,19 +84,19 @@ const ChatRoom=()=>{
     displayStatus(status)}, [status])
     useEffect(()=>{
       // console.log(messages)
-      
-      for(let i =0;i<chatBoxes.length;i++){
-        if(chatBoxes[i].key===activeKey){
+      let new_chatBoxes=chatBoxes
+      for(let i =0;i<new_chatBoxes.length;i++){
+        if(new_chatBoxes[i].key===activeKey){
           let res=messages.map(({ sender, body }, i) => (
             <p className="App-message" key={i}>
             <Tag color="blue">{sender}</Tag> {body}
             </p>))
-          chatBoxes[i].children=[...res,footer]
+          new_chatBoxes[i].children=[...res,footer]
         }
       }
       setMsgSent(true)
       // console.log(chatBoxes)
-      setChatBoxes(chatBoxes)
+      setChatBoxes(new_chatBoxes)
     },[messages]
     )
     useEffect(() => {
