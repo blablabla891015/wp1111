@@ -5,6 +5,7 @@ import {useChat}  from "../useChat";
 import { useState } from "react";
 import RegModal from "../compenents/RegModal";
 import { Button} from 'antd'
+import styled from "styled-components";
 const SignIn=()=>{
     const {Me,password,setSignIn,setMe,displayStatus,setPassword,sendLogin,sendReg}=useChat()
     const [regmodalOpen,setRegModalOpen]=useState(false)
@@ -41,15 +42,19 @@ const SignIn=()=>{
     const handel_reg=({ name ,password}) => {
         sendReg(name,password)
     }
-
+    const Footer = styled.div`
+height: 20px;
+visibility: hidden;
+`
+;
     return(
         <>
         <Title></Title>
         <LogIn me={Me} setName={setMe}></LogIn>
         <Password me={Me} password={password} setPassword={setPassword} onLogin={handleLogin_password}></Password>
-        <Button onClick={()=>{handleLogin_password(Me,password)}} color='blue'>LogIn</Button>
-        <Button onClick={()=>{setRegModalOpen(true)}} color='blue'>Regist</Button>
-        <div></div>
+        <Button onClick={()=>{handleLogin_password(Me,password)}} color='blue' type="primary">LogIn</Button>
+        <Footer></Footer>
+        <Button onClick={()=>{setRegModalOpen(true)}} color='blue' type="primary">Regist</Button>
         {/* <Button onClick={()=>{handleLogin_password(Me,password)}} color='blue'>abc</Button> */}
         <RegModal open={regmodalOpen}
             onCreate={handel_reg}

@@ -45,8 +45,9 @@ const ChatRoom=()=>{
     const [modalOpen, setModalOpen] = useState(false);
     const msgFooter=useRef(null)
 
-    const footer=<FootRef ref={msgFooter} key='footer'></FootRef>
+    const footer=()=><FootRef ref={msgFooter} key='footer'></FootRef>
     const scrollToBottom = () => {
+      // console.log(msgFooter.current)
       msgFooter.current?.scrollIntoView
       ({ behavior: 'smooth', block: "start" });
       };
@@ -89,12 +90,15 @@ const ChatRoom=()=>{
       setActiveKey(key);
       startChat(Me,key);
       }
-    useEffect(() => {
-    displayStatus(status)}, [status])
+    // useEffect(() => {
+    //   if(JSON.stringify(status) !== '{}'){
+    //     console.log(status)
+    //     displayStatus(status)}}, [status])
     useEffect(()=>{
       let new_chatBoxes=chatBoxes
       for(let i =0;i<new_chatBoxes.length;i++){
         if(new_chatBoxes[i].key===activeKey){
+          // const footer=()=><FootRef ref={msgFooter} key='footer'></FootRef>
           let res=messages.map(({ sender, body }, i) => {
             let isMe=false
             if(sender===Me){
@@ -102,16 +106,21 @@ const ChatRoom=()=>{
             }
             return(
             <StyledMessage isMe={isMe} key={i}> {body}</StyledMessage>)})
-          new_chatBoxes[i].children=[...res,footer]
+          new_chatBoxes[i].children=[...res,footer()]
+          console.log(new_chatBoxes[i].children)
         }
       }
+      // console.log('jghgj',msgSent)
       setMsgSent(true)
       setChatBoxes(new_chatBoxes)
     },[messages]
     )
     useEffect(() => {
       scrollToBottom();
+      // console.log('ggdgdsgsg',msgSent)
       setMsgSent(false);
+      // console.log('ggdgdsgsg',msgSent)
+
       }, [msgSent]);
     return(
       <>
@@ -151,7 +160,7 @@ const ChatRoom=()=>{
           })
           return
           }
-        console.log(activeKey)
+        // console.log(activeKey)
         sendMessage(msg,Me,activeKey)
         setBody('')
       }}
