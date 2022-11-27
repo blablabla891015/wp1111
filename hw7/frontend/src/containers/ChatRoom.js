@@ -109,6 +109,10 @@ const ChatRoom=()=>{
           new_chatBoxes[i].children=[...res,footer()]
           console.log(new_chatBoxes[i].children)
         }
+        else{
+          new_chatBoxes[i].children=[]
+
+        }
       }
       // console.log('jghgj',msgSent)
       setMsgSent(true)
@@ -127,16 +131,7 @@ const ChatRoom=()=>{
       <div className="App-title">
         <h1>{Me}'s ChatRoom</h1>
       </div>
-      <ChatBoxesWrapper items={chatBoxes} onEdit={onEdit} type="editable-card" onChange={chatboxonChange}>
-      {messages.length === 0 ? (
-      <p style={{ color: '#ccc' }}> No messages... </p>
-      ) : (
-      messages.map(({ name, body }, i) => (
-      <p className="App-message" key={i}>
-      <Tag color="blue">{name}</Tag> {body}
-      </p>
-      ))
-      )}
+      <ChatBoxesWrapper items={chatBoxes} onEdit={onEdit} type="editable-card" onChange={chatboxonChange} activeKey={activeKey}>
       </ChatBoxesWrapper>
       <ChatModal open={modalOpen}
             onCreate={({ name }) => {
