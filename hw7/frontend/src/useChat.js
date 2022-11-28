@@ -69,8 +69,22 @@ const ChatProvider = (props) => {
       client.send(JSON.stringify(data));
    };
    const sendMessage = (msg,me,to) => { 
-      let data={msg:msg,me:me,users:makeName(me,to)}
-      sendData(['input',data])
+      if(to !== ''){
+         if(msg.length>20){
+            
+            msg=msg.slice(0,20)+'\n'+msg.slice(20,msg.length)
+         }
+         let data={msg:msg,me:me,users:makeName(me,to)}
+         sendData(['input',data])
+      }
+      else{
+         displayStatus({
+            type:'error',
+            msg:'please open chatbox first'
+
+         })
+      }
+      
    }
    const sendLogin =(user,password)=>{
       sendData(['login',{user,password}])
