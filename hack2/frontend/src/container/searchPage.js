@@ -56,7 +56,7 @@ const SearchPage = () => {
                 restaurants.map((item) => (
                     // TODO Part I-2: search page front-end
                     <div className='resBlock' id={item.id} key={item.id}>
-                        <div className='redImgContainer'>
+                        <div className='resImgContainer'>
                             <img className='resImg' src={item.img}/>
                         </div>
                         <div className='resInfo'>
