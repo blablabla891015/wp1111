@@ -140,7 +140,15 @@ exports.GetInfo = async (req, res) => {
     /*******    NOTE: DO NOT MODIFY   *******/
     const id = req.query.id
     /****************************************/
+    Info.find({id:id},(err,data)=>{
+        if(err){
 
+        }
+        else{
+            res.status(200).send({ message: 'success', contents: data })
+        }
+
+    })
     // NOTE USE THE FOLLOWING FORMAT. Send type should be 
     // if success:
     // {
