@@ -22,9 +22,7 @@ exports.GetSearch = async (req, res) => {
     // NOTE Hint: 
     // use `db.collection.find({condition}).exec(err, data) {...}`
 
-    Info.find({price:priceFilter,tags:[mealFilter,typeFilter]},(err, data)=>{
-        console.log(priceFilter)
-        console.log(mealFilter)
+    Info.find({},(err, data)=>{
         if(err){
             res.status(403).send({ message: 'error', contents: 'get search error error'})
         }

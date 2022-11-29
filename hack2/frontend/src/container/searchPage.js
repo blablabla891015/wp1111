@@ -26,7 +26,8 @@ const SearchPage = () => {
         // console.log(state)
         // TODO Part I-3-b: get information of restaurants from DB
         const data=await instance.get('getSearch/',{params:{priceFilter, mealFilter, typeFilter, sortBy}})
-        // console.log('data is',data)
+        console.log('data is',data.data.contents)
+        setRestaurant(data.data.contents)
     }
 
     useEffect(() => {
@@ -45,6 +46,7 @@ const SearchPage = () => {
         return (priceText)
     }
     const getDiscription=(tags)=>{
+        console.log(tags)
         return tags.join(', ')
     }
     return (
@@ -64,7 +66,7 @@ const SearchPage = () => {
                                 <p className='distance'>{item.distance/1000}km</p>
                             </div>
                         </div>
-                        <p className='description'>{getDiscription(item.tags)}</p>
+                        <p className='description'>{getDiscription(item.tag)}</p>
                     </div>
                 ))
             }
