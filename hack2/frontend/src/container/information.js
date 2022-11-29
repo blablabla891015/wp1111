@@ -32,20 +32,14 @@ const Information = ({ info, rating }) => {
     }
 
     const getBusiness = (times) => {
+        let days = ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun']
         let res=[]
-        for(var key in times){
-            res.push(
-            <div className='singleDay' key={key}>
-                <div className='day'>
-                    {key}
-                </div>
-                <div className='time'>
-                    {times[key]}
-                </div>
-
-
-            </div>)
-            
+        console.log(times)
+        for(let i=0;i<days.length;i++){
+            if('All' in times){
+                console.log('check')
+            }
+    
         }
         return (
             <div className='businessTime'>
