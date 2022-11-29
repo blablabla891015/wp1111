@@ -38,7 +38,7 @@ const SearchPage = () => {
     const ToRestaurant = (e) => {
         let id=e.target.id.toString()
         console.log(e)
-        let d='/restaurant/$'+id
+        let d='/restaurant/:'+id
         navigate(d)
         // TODO Part III-1: navigate the user to restaurant page with the corresponding id
     }
