@@ -9,7 +9,7 @@
 import React from 'react'
 import '../css/restaurantPage.css'
 import ReactStars from "react-rating-stars-component";
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useRef} from "react";
 import Stars from '../components/stars';
 import axios from 'axios'
 
@@ -21,19 +21,30 @@ const Comment = ({ restaurantId, comments, setComments, setLoad }) => {
     const [rating, setRating] = useState(0)
     const [name, setName] = useState('')
     const [content, setContent] = useState('')
-
+    
     const changeRating = (newRating) => {
         setRating(newRating)
     };
 
 
     const storeComment = async () => {
-        await instance.post('createComment/', {
+        let id=restaurantId.split(':')[1]
+        let data=await instance.post('createComment/', {params:{restaurantId:id,name,rating,content}
             // TODO Part III-3-b: store the comment to the DB
         })
-    }
+        if(data.data.message==='success'){
+            comments.push(data.data.contents)
+            // console.log(comments)
+            setComments(comments)
 
+        }
+    }
+    const nameRef=useRef(null)
+    const contentRef=useRef(null)
     const submitComment = () => {
+        storeComment()
+        setContent('')
+        setName('')
         // TODO Part III-3-b: submit a comment and reset input fields
     }
     return (
@@ -54,7 +65,7 @@ const Comment = ({ restaurantId, comments, setComments, setLoad }) => {
                         <button onClick={submitComment}>Submit</button>
                     </div>
                 </div>
-                <textarea className='content' placeholder='Type your comment' onChange={e => setContent(e.target.value)} value={content} />
+                <textarea  className='content' placeholder='Type your comment' onChange={e => setContent(e.target.value)} value={content} />
             </div>
 
             <div className='comments'>

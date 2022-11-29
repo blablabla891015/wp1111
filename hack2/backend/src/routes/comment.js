@@ -40,7 +40,21 @@ exports.GetCommentsByRestaurantId = async (req, res) => {
 
 exports.CreateComment = async (req, res) => {
     /*******    NOTE: DO NOT MODIFY   *******/
-    const body = req.body
+    const body = req.body.params
     /****************************************/
+    const restaurantId=body.restaurantId
+    const name=body.name
+    const rating=body.rating
+    const content=body.content
+    // console.log(body)
+    const new_comment=new Comment({restaurantId:restaurantId,name:name,rating:rating,content:content})
+
+    try{
+        await new_comment.save()
+    }
+    catch(e){
+        console.log(e)
+    }
+    res.status(200).send({ message: 'success', contents: new_comment })
     // TODO Part III-3-b: create a new comment to a restaurant
 }

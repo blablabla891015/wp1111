@@ -34,7 +34,7 @@ const Information = ({ info, rating }) => {
     const getBusiness = (times) => {
         let days = ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun']
         let res=[]
-        console.log(times)
+        // console.log(times)
         for(let i=0;i<days.length;i++){
             if(days[i] in times){
                 res.push(<div className='singleDay' key={days[i]}>

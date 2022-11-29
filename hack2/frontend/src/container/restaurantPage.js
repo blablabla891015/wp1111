@@ -48,6 +48,7 @@ const RestaurantPage = () => {
     }, [])
     let n_rating = 0;
     useEffect(() => {
+        // setComments(comments)
         for(let i=0;i<comments.length;i++){
             n_rating=n_rating+comments[i].rating
         }
