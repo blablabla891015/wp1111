@@ -18,10 +18,13 @@ exports.GetSearch = async (req, res) => {
     const typeFilter  = req.query.typeFilter
     const sortBy      = req.query.sortBy
     /****************************************/
-
+    console.log(req.query)
     // NOTE Hint: 
     // use `db.collection.find({condition}).exec(err, data) {...}`
-    Info.find({},(err, data)=>{
+
+    Info.find({price:priceFilter,tags:[mealFilter,typeFilter]},(err, data)=>{
+        console.log(priceFilter)
+        console.log(mealFilter)
         if(err){
             res.status(403).send({ message: 'error', contents: 'get search error error'})
         }

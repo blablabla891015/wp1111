@@ -23,9 +23,10 @@ const SearchPage = () => {
         const mealFilter=state.mealFilter
         const typeFilter=state.typeFilter
         const sortBy=state.sortBy
+        // console.log(state)
         // TODO Part I-3-b: get information of restaurants from DB
-        const data=await instance.get('getSearch/',{priceFilter, mealFilter, typeFilter, sortBy})
-        console.log('data is',data)
+        const data=await instance.get('getSearch/',{params:{priceFilter, mealFilter, typeFilter, sortBy}})
+        // console.log('data is',data)
     }
 
     useEffect(() => {
