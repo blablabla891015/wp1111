@@ -1,55 +1,32 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
+/****************************************************************************
+  FileName      [ App.js ]
+  PackageName   [ src ]
+  Author        [ Chin-Yi Cheng ]
+  Synopsis      [ Implement the router ]
+  Copyright     [ 2022 11 ]
+****************************************************************************/
 
-// Params are placeholders in the URL that begin
-// with a colon, like the `:id` param defined in
-// the route in this example. A similar convention
-// is used for matching dynamic segments in other
-// popular web frameworks like Rails and Express.
+import './css/App.css';
 
-export default function App(props) {
-  
-  return (
-    <Router>
-      <div>
-        <h2>Accounts</h2>
+import { React, useState, useEffect } from 'react'
+import NavBar from './components/navigationBar';
+import MainPage from './container/mainPage';
+import SearchPage from './container/searchPage';
+import RestaurantPage from './container/restaurantPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-        <ul>
-          <li>
-            <Link to="/netflix">Netflix</Link>
-          </li>
-          <li>
-            <Link to="/zillow-group">Zillow Group</Link>
-          </li>
-          <li>
-            <Link to="/yahoo">Yahoo</Link>
-          </li>
-          <li>
-            <Link to="/modus-create">Modus Create</Link>
-          </li>
-        </ul>
+function App() {
+    return (
+        <Router>
+            <NavBar />
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/restaurant/:id" element={<RestaurantPage />} />
+            </Routes>
 
-        <Routes>
-          <Route path="/:id" element={<Child />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+        </Router>
+    );
 }
 
-const Child=()=> {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  let { id } = useParams();
-  return (
-    <div>
-      <h3>ID: {id}</h3>
-    </div>
-  );
-}
+export default App;
