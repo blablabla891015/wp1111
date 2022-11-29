@@ -36,10 +36,30 @@ const Information = ({ info, rating }) => {
         let res=[]
         console.log(times)
         for(let i=0;i<days.length;i++){
-            if('All' in times){
-                console.log('check')
+            if(days[i] in times){
+                res.push(<div className='singleDay' key={days[i]}>
+                    <div className='day'>{days[i]}</div>
+                    <div className='time'>{times[days[i]]}</div>
+                </div>)
+            }
+            else{
+                res.push(
+                    <div className='singleDay' key={days[i]}>
+                    <div className='day'>{days[i]}</div>
+                    <div className='time'>Closed</div>
+                </div>
+                )
             }
     
+        }
+        if('All' in times){
+            res=days.map((day)=>(
+                <div className='singleDay' key={day}>
+                    <div className='day'>{day}</div>
+                    <div className='time'>{times['All']}</div>
+                </div>
+
+            ))
         }
         return (
             <div className='businessTime'>
