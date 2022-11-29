@@ -65,8 +65,9 @@ const SearchPage = () => {
                                 <p className='price'>{getPrice(item.price)}</p>
                                 <p className='distance'>{item.distance/1000} km</p>
                             </div>
+                            <p className='description'>{getDiscription(item.tag)}</p>
                         </div>
-                        <p className='description'>{getDiscription(item.tag)}</p>
+                        {/* <p className='description'>{getDiscription(item.tag)}</p> */}
                     </div>
                 ))
             }
