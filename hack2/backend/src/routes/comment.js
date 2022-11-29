@@ -13,6 +13,15 @@ import Comment from '../models/comment'
 exports.GetCommentsByRestaurantId = async (req, res) => {
     /*******    NOTE: DO NOT MODIFY   *******/
     const id = req.query.restaurantId
+    // console.log(id)
+    Comment.find({restaurantId:id},(err,data)=>{
+        if(err){
+
+        }
+        else{
+            res.status(200).send({ message: 'success', contents: data })
+        }
+    })
     /****************************************/
     // TODO Part III-3-a: find all comments to a restaurant
 
