@@ -59,16 +59,16 @@ const SearchPage = () => {
                 restaurants.map((item) => (
                     // TODO Part I-2: search page front-end
                     <div className='resBlock' id={item.id} key={item.id} onClick={ToRestaurant}>
-                        <div className='resImgContainer' id={item.id}>
-                            <img className='resImg' src={item.img} id={item.id}/>
+                        <div className='resImgContainer' >
+                            <img className='resImg' src={item.img}/>
                         </div>
-                        <div className='resInfo' id={item.id}>
-                            <div className='title' id={item.id}>
-                                <p className='name' id={item.id}>{item.name}</p>
-                                <p className='price' id={item.id}>{getPrice(item.price)}</p>
-                                <p className='distance' id={item.id}>{item.distance/1000} km</p>
+                        <div className='resInfo' >
+                            <div className='title' >
+                                <p className='name' >{item.name}</p>
+                                <p className='price' >{getPrice(item.price)}</p>
+                                <p className='distance' >{item.distance/1000} km</p>
                             </div>
-                            <p className='description' id={item.id}>{getDiscription(item.tag)}</p>
+                            <p className='description' >{getDiscription(item.tag)}</p>
                         </div>
                         {/* <p className='description'>{getDiscription(item.tag)}</p> */}
                     </div>
