@@ -6,7 +6,7 @@
   Copyright     [ 2022 11 ]
 ****************************************************************************/
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,useRef} from 'react'
 import '../css/searchPage.css'
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -35,10 +35,10 @@ const SearchPage = () => {
 
 
     const navigate = useNavigate();
-    const ToRestaurant = (e) => {
-        let id=e.target.id.toString()
-        console.log(e)
-        let d='/restaurant/:'+id
+    const ToRestaurant = (id) => {
+        console.log(id)
+        let d='/restaurant/:'+id.toString()
+        // console.log(d)
         navigate(d)
         // TODO Part III-1: navigate the user to restaurant page with the corresponding id
     }
@@ -55,12 +55,14 @@ const SearchPage = () => {
     return (
 
         <div className='searchPageContainer'>
-            {
-                restaurants.map((item) => (
+            {  
+                restaurants.map((item) => {
+                    // const ref=useRef(null)
+                    return (
                     // TODO Part I-2: search page front-end
-                    <div className='resBlock' id={item.id} key={item.id} onClick={ToRestaurant}>
-                        <div className='resImgContainer' >
-                            <img className='resImg' src={item.img}/>
+                    <div className='resBlock' id={item.id} key={item.id}  onClick={()=>ToRestaurant(item.id)}>
+                        <div className='resImgContainer'>
+                            <img className='resImg' src={item.img} key={item.id}/>
                         </div>
                         <div className='resInfo' >
                             <div className='title' >
@@ -72,7 +74,7 @@ const SearchPage = () => {
                         </div>
                         {/* <p className='description'>{getDiscription(item.tag)}</p> */}
                     </div>
-                ))
+                )})
             }
         </div>
     )

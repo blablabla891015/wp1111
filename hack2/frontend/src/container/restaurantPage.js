@@ -23,7 +23,8 @@ const RestaurantPage = () => {
     const [comments, setComments] = useState([])
     const [loading, setLoading] = useState(true)
     const getInfo = async () => {
-        let _id=id[1]
+        let _id=id.split(':')
+        
         const data=await instance.get('/getInfo',{params:{id:_id}})
         console.log(data.data)
         setInfo(data.data.contents[0])
