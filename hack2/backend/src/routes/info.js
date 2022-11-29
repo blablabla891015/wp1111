@@ -11,6 +11,12 @@
 import Info from '../models/info'
 import mongoose from 'mongoose'
 // const db = mongoose.connection
+const getPrice = (price) => {
+    let priceText = ""
+    for (let i = 0; i < price; i++)
+        priceText += "$"
+    return (priceText)
+}
 exports.GetSearch = async (req, res) => {
     /*******    NOTE: DO NOT MODIFY   *******/
     const priceFilter = req.query.priceFilter
@@ -18,16 +24,103 @@ exports.GetSearch = async (req, res) => {
     const typeFilter  = req.query.typeFilter
     const sortBy      = req.query.sortBy
     /****************************************/
-    console.log(req.query)
+    // console.log(req.query)
     // NOTE Hint: 
     // use `db.collection.find({condition}).exec(err, data) {...}`
-
+    const compare_d=(a,b)=>{
+        if(a.distance>b.distance){
+            return 1
+        }
+        else if((a.distance<b.distance)){
+            return -1
+        }
+        else{
+            return 0
+        }
+    }
+    const compare_p=(a,b)=>{
+        if(a.price>b.price){
+            return 1
+        }
+        else if((a.price<b.price)){
+            return -1
+        }
+        else{
+            return 0
+        }
+    }
     Info.find({},(err, data)=>{
         if(err){
             res.status(403).send({ message: 'error', contents: 'get search error error'})
         }
         else{
-            res.status(200).send({ message: 'success', contents: data })
+            let abcd=[]
+            // let add_p=false
+            // let add_m=false
+            // let add_t=false
+            for(let i=0;i<data.length;i++){
+                // console.log(data[i])
+                let add_p=false
+                let add_m=false
+                let add_t=false
+                if(mealFilter !== undefined){
+                    for(let j=0;j<data[i].tag.length;j++){
+                        if(mealFilter.includes(data[i].tag[j])){
+                            add_m=true
+                        }
+                    }
+                }
+                else{
+                    // console.log(undefined,"m")
+                    add_m=true
+                }
+
+                if(typeFilter !== undefined){
+                    for(let j=0;j<data[i].tag.length;j++){
+                        if(typeFilter.includes(data[i].tag[j])){
+                            add_t=true
+                        }
+                    }
+                }
+                else{
+                    // console.log(undefined,"t")
+                    add_t=true
+                }
+
+                if(priceFilter !== undefined){
+                    if(priceFilter.includes(getPrice(data[i].price))){
+
+                        // console.log(getPrice(data[i].price))
+                        add_p=true
+                    }
+                }
+                else{
+                    // console.log(undefined,"p")
+                    add_p=true
+
+                }
+                // console.log(add_p,add_m,add_t)
+                // console.log(data[i].tag,data[i].price)
+                if(priceFilter===undefined && mealFilter===undefined && typeFilter===undefined){
+                    // console.log('check')
+                    add_p=true
+                    add_m=true
+                    add_t=true
+                }
+                if(add_p && add_m && add_t){
+                    abcd.push(data[i])
+                }
+
+            }
+            console.log(sortBy)
+            console.log(abcd.length)
+            if(sortBy==='price'){
+                abcd.sort(compare_p)
+            }
+            else{
+                abcd.sort(compare_d)
+            }
+            res.status(200).send({ message: 'success', contents: abcd })
         }
     })
 
