@@ -39,14 +39,18 @@ const Comment = ({ restaurantId, comments, setComments, setLoad }) => {
 
         }
     }
-    const nameRef=useRef(null)
-    const contentRef=useRef(null)
-    const submitComment = () => {
-        storeComment()
+    // const nameRef=useRef(null)
+    // const contentRef=useRef(null)
+    const submitComment = async() => {
+        await storeComment()
         setContent('')
         setName('')
         // TODO Part III-3-b: submit a comment and reset input fields
     }
+    // useEffect(()=>{
+    //     console.log('check')
+
+    // },comments)
     return (
         <div className='commentContainer'>
             <div className='inputContainer'>
