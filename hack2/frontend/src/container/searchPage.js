@@ -23,10 +23,10 @@ const SearchPage = () => {
         const mealFilter=state.mealFilter
         const typeFilter=state.typeFilter
         const sortBy=state.sortBy
-        // console.log(state)
+        console.log(state)
         // TODO Part I-3-b: get information of restaurants from DB
         const data=await instance.get('getSearch/',{params:{priceFilter, mealFilter, typeFilter, sortBy}})
-        console.log('data is',data.data.contents)
+        // console.log('data is',data.data.contents)
         setRestaurant(data.data.contents)
     }
 
@@ -46,7 +46,7 @@ const SearchPage = () => {
         return (priceText)
     }
     const getDiscription=(tags)=>{
-        console.log(tags)
+        // console.log(tags)
         return tags.join(', ')
     }
     return (
@@ -63,7 +63,7 @@ const SearchPage = () => {
                             <div className='title'>
                                 <p className='name'>{item.name}</p>
                                 <p className='price'>{getPrice(item.price)}</p>
-                                <p className='distance'>{item.distance/1000}km</p>
+                                <p className='distance'>{item.distance/1000} km</p>
                             </div>
                         </div>
                         <p className='description'>{getDiscription(item.tag)}</p>
