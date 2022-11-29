@@ -10,7 +10,7 @@
 
 import Info from '../models/info'
 import mongoose from 'mongoose'
-const db = mongoose.connection
+// const db = mongoose.connection
 exports.GetSearch = async (req, res) => {
     /*******    NOTE: DO NOT MODIFY   *******/
     const priceFilter = req.query.priceFilter
@@ -21,7 +21,7 @@ exports.GetSearch = async (req, res) => {
 
     // NOTE Hint: 
     // use `db.collection.find({condition}).exec(err, data) {...}`
-    db.collection.find({condition},(err, data)=>{
+    Info.find({},(err, data)=>{
         if(err){
             res.status(403).send({ message: 'error', contents: 'get search error error'})
         }

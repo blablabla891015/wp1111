@@ -19,7 +19,13 @@ const SearchPage = () => {
     const { state } = useLocation();
     const [restaurants, setRestaurant] = useState([])
     const getRestaurant = async () => {
+        const priceFilter=state.priceFilter
+        const mealFilter=state.mealFilter
+        const typeFilter=state.typeFilter
+        const sortBy=state.sortBy
         // TODO Part I-3-b: get information of restaurants from DB
+        const data=await instance.get('getSearch/',{priceFilter, mealFilter, typeFilter, sortBy})
+        console.log('data is',data)
     }
 
     useEffect(() => {
@@ -37,14 +43,15 @@ const SearchPage = () => {
             priceText += "$"
         return (priceText)
     }
-
+    const getDiscription=(tags)=>{
+        return tags.join(', ')
+    }
     return (
 
         <div className='searchPageContainer'>
             {
                 restaurants.map((item) => (
                     // TODO Part I-2: search page front-end
-                    <>
                     <div className='resBlock' id={item.id} key={item.id}>
                         <div className='redImgContainer'>
                             <img className='resImg' src={item.img}/>
@@ -53,12 +60,11 @@ const SearchPage = () => {
                             <div className='title'>
                                 <p className='name'>{item.name}</p>
                                 <p className='price'>{getPrice(item.price)}</p>
-                                <p className='distance'></p>
+                                <p className='distance'>{item.distance/1000}km</p>
                             </div>
                         </div>
-                        <p className='description'></p>
+                        <p className='description'>{getDiscription(item.tags)}</p>
                     </div>
-                    </>
                 ))
             }
         </div>
