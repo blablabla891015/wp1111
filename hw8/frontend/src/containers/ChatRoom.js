@@ -138,10 +138,10 @@ const ChatRoom=()=>{
       <ChatBoxesWrapper items={chatBoxes} onEdit={onEdit} type="editable-card" onChange={chatboxonChange} activeKey={activeKey}>
       </ChatBoxesWrapper>
       <ChatModal open={modalOpen}
-            onCreate={({ name }) => {
+            onCreate={async({ name }) => {
             setActiveKey(createChatBox(name));
             setFriend(createChatBox(name))
-            startChat(Me,name)
+            await startChat(Me,name)
             setModalOpen(false);
             }}
             onCancel={() => { setModalOpen(false);}}>
@@ -152,7 +152,7 @@ const ChatRoom=()=>{
       onChange={(e) => setBody(e.target.value)}
       enterButton="Send"
       placeholder="Type a message here..."
-      onSearch={(msg) => {
+      onSearch={async(msg) => {
         if (!msg) {
           displayStatus({
           type: 'error',
@@ -161,7 +161,8 @@ const ChatRoom=()=>{
           return
           }
         // console.log(msg)
-        sendMessage({variables:{from:Me,to:activeKey,body:msg}})
+        await sendMessage({variables:{from:Me,to:activeKey,body:msg}})
+
         setBody('')
       }}
       ></Input.Search>

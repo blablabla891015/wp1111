@@ -2,12 +2,12 @@ type Query {
     Chatbox(name1:String!,name2:String!):Chatbox
 }
 type Chatbox {
-    name :String
+    name :String!
     messages :[Message]
  }
 type Message {
-    sender:String
-    body:String
+    sender:String!
+    body:String!
  }
 type Mutation {
  createChatbox(name1: String!, name2: String!): Chatbox

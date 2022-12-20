@@ -49,17 +49,16 @@ const ChatProvider = (props) => {
    }
 
    const [getChatbox] = useMutation(CREATE_CHATBOX_MUTATION);
-   
-   const {data,loading,subscribeToMore}=useQuery(CHATBOX_QUERY,{variables:{name1:Me,name2:friend}})
-   console.log(data)
-   // useEffect(()=>{console.log(friend)},[friend])
-
    const startChat=async(name1,name2)=>{
       const {data}=await getChatbox({variables:{name1,name2}})
       setMessages(data.createChatbox.messages)
       
 
    }
+   
+   const {data,loading,subscribeToMore}=useQuery(CHATBOX_QUERY,{variables:{name1:Me,name2:friend}})
+   // console.log(subscribeToMore)
+   // // useEffect(()=>{console.log(subscribeToMore)},[data])
    useEffect(() => {
       console.log('check')
       try {
@@ -72,7 +71,8 @@ const ChatProvider = (props) => {
 
       if (!subscriptionData.data) return prev;
       const newMessage = subscriptionData.data.message;
-      setMessages(prev.Chatbox.messages)
+      // console.log()
+      setMessages([...prev.Chatbox.messages, newMessage])
       return {
       Chatbox: {
          // name:makeName(Me,friend),
@@ -84,7 +84,7 @@ const ChatProvider = (props) => {
       } catch (e) {
          console.log(e)
       }
-     }, [data]);
+     }, [subscribeToMore]);
      
    
    const displayStatus = (s) => {
