@@ -14,7 +14,6 @@ async function connect() {
         useUnifiedTopology: true,
         }
     
-    // TODO Part I-3: connect the backend to mongoDB
 ).then(async res => {
     if (process.env.MODE === 'Reset') {
         console.log('Reset Mode: reset the data')
