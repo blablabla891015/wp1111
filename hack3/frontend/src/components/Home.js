@@ -72,7 +72,7 @@ function Home() {
           if (!subscriptionData.data) return prev;
 
           const deletedID = subscriptionData.data.itemDeleted;
-          console.log(deletedID)
+          // console.log(deletedID)
           let new_items=JSON.parse(JSON.stringify(prev.items))
           let index=-1
           for(let i =0;i<prev.items.length;i++){
