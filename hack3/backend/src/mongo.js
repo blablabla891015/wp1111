@@ -2,12 +2,11 @@ import mongoose from "mongoose";
 import { dataInit } from "./upload.js";
 
 import "dotenv-defaults/config.js";
-import dotenv from 'dotenv-defaults'
 mongoose.set("strictQuery", true);
 
 async function connect() {
   // TODO 1 Connect to your MongoDB and call dataInit()
-  dotenv.config()
+  // dotenv.config()
   mongoose.connect(
     process.env.MONGO_URL, {
         useNewUrlParser: true,
