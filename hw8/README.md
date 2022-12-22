@@ -1,1 +1,1 @@
-password 不要理他，我hw7寫得但沒空用
+password 不要理他，我hw7寫的但沒空用
