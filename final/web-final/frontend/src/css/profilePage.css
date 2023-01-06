@@ -1,0 +1,221 @@
+.blockage{
+    background-color:rgba(0, 0, 0, 0.7);
+    position:fixed;
+    width:100%;
+    height:100%;
+}
+.addInfoModal{
+    position:relative;
+    margin:auto;
+    margin-top:5rem;
+    width:600px;
+    height:600px;
+    background-color:white;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.addInfoTitleContainer{
+    /* background-color:blue; */
+    width:80%;
+    margin: 1rem 0rem 1rem 0rem;
+}
+.addInfoTitleContainer p{
+    font-size: 30px;
+    margin:0;
+    padding:0 
+}
+.addInfoInputsContainer{
+    /* background-color:green; */
+    width:80%;
+}
+.addInfoInput{
+    /* background-color:orange; */
+    margin: 0.7rem 0rem 0.7rem 0rem;
+    font-size: 20px;
+}
+.addInfoInput p{
+    margin:0;
+}
+.addInfoInput input{
+    width:100%;
+    height:1.5rem;
+    margin:0;
+    padding:0;
+    font-size:18px;
+    background-color:rgb(250, 252, 255);
+    border: solid rgb(199, 199, 199) 1px;
+}
+.addInfoInput textarea{
+    resize:none;
+    width:100%;
+    height:10rem;
+    font-size: 18px;
+    background-color:rgb(250, 252, 255);
+    border: solid rgb(199, 199, 199) 1px;
+}
+.addInfoBtnRow{
+    /* background-color:pink; */
+    padding: 1rem 0rem 1rem 0rem;
+    width:80%;
+    display:flex;
+    justify-content:center;
+}
+.addInfoBtn{
+    /* background-color:red; */
+    width:8rem;
+    border-radius: 1.5rem;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:20px;
+    height:3rem;
+    margin:0rem 1rem 0rem 1rem;
+}
+#addInfoCancel{
+    color:rgba(31, 28, 33, 0.612);
+}
+#addInfoCancel:hover{
+    color:rgb(31,28,33);
+}
+#addInfoSave {
+    background-color:magenta;
+    border: solid 2px magenta;
+    color:white;
+}
+#addInfoSave:hover{
+    background-color:white;
+    color: magenta;
+}
+.titleContainer{
+    width:100%;
+    margin-top:3rem;
+    padding-bottom:2rem;
+    height:300px;
+    background-color:black;
+    /* background-color:rgb(59, 54, 58); */
+    /* position:fixed; */
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+}
+.portrait{
+    width:200px;
+    height:200px;
+    border-radius:100px;
+    background-color:magenta;
+    margin:0rem 4rem 0rem 6rem;
+}
+.profileTitleBlock {
+    width:30%;
+    height:140px;
+    margin-right: 2rem;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:space-between;
+}
+.profileName {
+    color:white;
+    font-size:48px;
+    font-weight:800;
+    margin:0.5rem;
+}
+.profileTag{
+    color:rgba(255,255,255,0.6);
+    font-size:20px;
+    font-weight:400;
+}
+.buttonRow{
+    /* background-color:green; */
+    width:60%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+.buttonRow .button{
+    height:2rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border:rgba(255, 255, 255, 0.859) solid 1px;
+    color:rgba(255, 255, 255, 0.835);
+    padding:0rem 1rem 0rem 1rem;
+    border-radius:1rem;
+    font-weight:300;
+    font-size:20px;
+    margin-top:1rem;
+}
+.buttonRow .button:hover{
+    border-color:magenta;
+    color:magenta;
+}
+.profileIntroContainer{
+    background-color:rgb(29, 29, 29);
+    width:100%;
+    padding: 3rem 0rem 3rem 0rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.profileIntroBlock{
+    background-color:black;
+    padding: 5rem 0rem 5rem 0rem;
+    width:60%;
+    margin:1rem;
+}
+.profileIntroTitle{
+    /* background-color:blue; */
+    width:90%;
+    margin-left:3rem;
+}
+.profileIntroTitle h1{
+    font-size:40px;
+    color:white;
+    padding:0;
+    margin:0;
+}
+.profileIntroTitle h2{
+    font-size:20px;
+    color:violet;
+    margin:0;
+    padding:0;
+}
+.profileIntroText{
+    /* background-color:orange; */
+    display: flex;
+    flex-direction:column;
+    width:90%;
+    /* margin-left:3rem; */
+    color:rgba(255, 255, 255, 0.746);
+    margin: 0rem 0rem 0rem 3rem;
+    font-size: 20px;
+}
+.addNewBlock{
+    width: 12rem;
+    height:60px;
+    border-radius:6rem;
+    /* background-color:violet; */
+    color: violet;
+    border: solid 2px violet;
+    text-align: center;
+    font-size:20px;
+    font-weight: bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:2rem 0rem 1rem 0rem;
+}
+.addNewBlock p{
+    margin:0.5rem;
+}
+.addNewBlock:hover{
+    background-color:white;
+    border-color:white;
+    color:rgb(29,29,29);
+}

@@ -1,0 +1,15 @@
+yarn.lock
+*/yarn.lock
+*/yarn-error.log
+
+package-lock.json
+*/package-lock.json
+
+node_modules
+*/node_modules
+
+backend/.env
+
+/frontend_
+
+/beta

@@ -1,0 +1,28 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Beer-and-Skittles/web-final.git",
+  "author": {
+    "name": "Beer-and-Skittles",
+    "email": "jessicahu1012@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "blablabla891015",
+      "email": "b08901198@ntu.edu.tw"
+    },
+    {
+      "name": "Joey-Chiu",
+      "email": "b07901190@ntu.edu.tw"
+    }
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "cd frontend && yarn start",
+    "server": "cd backend && yarn server",
+    "install:prod": "cd frontend && yarn install --freeze-lockfile && cd ../backend && yarn install",
+    "build": "cd frontend && yarn build",
+    "deploy": "cd backend && yarn deploy"
+  }
+}

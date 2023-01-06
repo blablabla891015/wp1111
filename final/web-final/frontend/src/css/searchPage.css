@@ -1,0 +1,52 @@
+
+.displayContainer{
+    background-color:black;
+    display:flex;
+    flex-direction:column;
+    padding: 1rem;
+    align-items:center;
+}
+.profileContainer {
+    background-color:rgb(15,15,15);
+    width:60%;
+    height:100px;
+    margin: 0.5rem 3rem 1rem 0rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+}
+.imgContainer{
+    height:80px;
+    width:80px;
+    background-color:teal;
+}
+
+.titleA{
+    margin-top:1.5rem;
+    color:rgba(255,255,255);
+}
+.titleB{
+    margin-bottom:2rem;
+    /* color:red; */
+    color:rgba(255,255,255,0.6);
+}
+.searchTitleContainer{
+    /* background-color:orange; */
+    height:100%;
+    width:300px;
+}
+.searchTagContainer{
+    /* background-color:red; */
+    color:rgba(255,255,255,0.6);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    height:100px;
+    width:300px;
+}
+.iconContainer{
+    background-color:magenta;
+    height:100px;
+    width:300px;
+}
